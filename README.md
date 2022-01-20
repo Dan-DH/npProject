@@ -34,5 +34,3 @@ Pages:
 - React
 - NodeJS
 - GraphQL
-
-
