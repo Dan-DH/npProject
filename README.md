@@ -24,8 +24,8 @@ Pages:
 - Password recovery. Allows the user to input the email and get a password recovery email. After submission it redirects the user to the login page.
 
 ## Site sketch design
-<img src="https://github.com/dan-dh/npProject/blob/master/sketch1.jpg? raw=true" width="600"/>
-<img src="https://github.com/dan-dh/npProject/blob/master/sketch2.jpg? raw=true" width="600"/>
+<img src="https://github.com/dan-dh/npProject/blob/master/sketch1.jpg?raw=true" width="600"/>
+<img src="https://github.com/dan-dh/npProject/blob/master/sketch2.jpg?raw=true" width="600"/>
 
 
 ## Tools
