@@ -1,0 +1,30 @@
+{
+  "name": "geekout",
+  "version": "1.0.0",
+  "description": "GeekOut is a platform to connect with fellow geeks/nerds/cool people.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dan-DH/npProject.git"
+  },
+  "author": "Dan-DH",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Dan-DH/npProject/issues"
+  },
+  "homepage": "https://github.com/Dan-DH/npProject#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "dotenv": "^14.2.0",
+    "express": "^4.17.2",
+    "mongoose": "^6.1.7",
+    "passport": "^0.5.2"
+  },
+  "devDependencies": {
+    "concurrently": "^7.0.0",
+    "nodemon": "^2.0.15"
+  }
+}
