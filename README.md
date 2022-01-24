@@ -1,5 +1,6 @@
-# GeekOut
-GeekOut is a platform to connect with fellow geeks/nerds/cool people. 
+<img src="https://github.com/Dan-DH/npProject/blob/master/client/src/static/images/gitBanner.png?raw=true"/>
+
+## Connect with fellow geeks/nerds/cool people.
 
 ## How does it work
 1. Create an account using your email
