@@ -4,7 +4,6 @@ require("dotenv").config();
 // const api = reqDir("./backend/API", { recurse: true });
 const { ApolloServer } = require("apollo-server-express");
 const express = require("express");
-const cors = require("cors");
 
 //requirements
 const { typeDefs } = require("./backend/API/typeDefs");
@@ -32,8 +31,6 @@ const starServer = async () => {
     .catch((err) => console.log(err));
 
   await server.start();
-
-  //app.use(cors());
 
   server.applyMiddleware({ app, path: "/graphql" });
 

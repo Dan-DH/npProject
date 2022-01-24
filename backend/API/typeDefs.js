@@ -27,11 +27,12 @@ const typeDefs = gql`
     ev_type: String!
     ev_language: String
     ev_online: Boolean!
-    ev_creation_date: Date!
-    ev_start_date: Date!
-    ev_end_date: Date!
+    ev_creation_date: Date #make compulsory
+    ev_start_date: Date
+    ev_end_date: Date
     ev_location: String!
     ev_description: String
+    ev_max_participants: Int
     ev_participants: [String]!
   }
 
@@ -46,15 +47,15 @@ const typeDefs = gql`
     createUser(username: String!, email: String!, password: String!): User
 
     createEvent(
-      id: ID!
       ev_organizer: String!
       ev_name: String!
-      ev_creation_date: Date!
-      ev_start_date: Date!
-      ev_end_date: Date!
+      # ev_creation_date: Date!
+      # ev_start_date: Date!
+      # ev_end_date: Date!
       ev_location: String!
       ev_description: String
       ev_participants: [String]!
+      ev_max_participants: Int
     ): Event
   }
 `;

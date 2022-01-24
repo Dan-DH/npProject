@@ -6,11 +6,12 @@ const eventSchema = new Schema({
   ev_type: String,
   ev_language: String,
   ev_online: Boolean,
-  ev_creation_date: Date,
+  ev_creation_date: { type: Date, default: Date.now },
   ev_start_date: Date,
   ev_end_date: Date,
   ev_location: String,
   ev_description: String,
+  ev_max_participants: Number,
   ev_participants: [String],
   comments: [
     {
