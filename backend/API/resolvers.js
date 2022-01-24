@@ -14,7 +14,7 @@ const resolvers = {
     //Returns a specific event
     async getEvent(id) {
       try {
-        const event = await Event.find();
+        const event = await Event.findOne({ _id: id });
         return event;
       } catch (err) {
         throw new Error(err);
