@@ -1,0 +1,36 @@
+user {
+    _id,
+    username: String,
+    email: String,
+    password: String,
+    acc_date: Date,
+    profile_pic: String,
+    bio: String,
+    moderator: Bool,
+    ban: Int, //0 okay, 1 temp ban, 2 perm ban
+    band_timer: Int //# days of temp ban
+    events: [{
+        _id,
+        ev_organizer: Object Id,
+        ev_name: String,
+        ev_start_date: Date,
+        ev_end_date: Date,
+        ev_location: String ? ,
+        ev_description: String,
+        ev_participants : [Object Ids],
+        comments: {
+            author: Object Id,
+            content: String,
+            post_date: Date[Object Ids of comments]
+    }],
+    past_events: [{
+        _id,
+        ev_organizer: Object Id,
+        ev_name: String,
+        ev_start_date: Date,
+        ev_end_date: Date,
+        ev_location: String ? ,
+        ev_description: String,
+        ev_participants : [Object Ids]
+    }],
+}
