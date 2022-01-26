@@ -7,7 +7,7 @@ const resolvers = {
     //Returns list of all events in the database
     async getEvents() {
       try {
-        const events = await Event.find(); //this is an error
+        const events = await Event.find();
         return events;
       } catch (err) {
         throw new Error(err);
@@ -26,7 +26,7 @@ const resolvers = {
     //Returns list of all users in the database
     async getUsers() {
       try {
-        const users = await Event.find(); //this is an error
+        const users = await User.find({}, { password: 0 });
         return users;
       } catch (err) {
         throw new Error(err);
@@ -81,7 +81,7 @@ const resolvers = {
 
     createEvent: (_, req) => {
       const newEvent = Event.create({
-        ev_orgnanizer: req.ev_orgnanizer,
+        ev_organizer: req.ev_organizer,
         ev_name: req.ev_name,
         ev_type: req.ev_type,
         ev_language: req.ev_language,

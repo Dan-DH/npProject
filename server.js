@@ -4,6 +4,7 @@ require("dotenv").config();
 // const api = reqDir("./backend/API", { recurse: true });
 const { ApolloServer } = require("apollo-server-express");
 const express = require("express");
+const cors = require("cors");
 
 //requirements
 const { typeDefs } = require("./backend/API/typeDefs");
@@ -17,7 +18,6 @@ const db = process.env.MONGO_DB;
 //starting server
 const starServer = async () => {
   const server = new ApolloServer({
-    cors: true,
     typeDefs,
     //mocks: true,
     resolvers,
@@ -31,6 +31,13 @@ const starServer = async () => {
     .catch((err) => console.log(err));
 
   await server.start();
+
+  // const corsOptions = {
+  //   origin: "*",
+  //   credentials: true,
+  // };
+
+  // app.use(cors(corsOptions));
 
   server.applyMiddleware({ app, path: "/graphql" });
 
