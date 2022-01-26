@@ -1,4 +1,4 @@
-<img src="https://github.com/Dan-DH/npProject/blob/master/client/src/static/images/gitBanner.png"/>
+<img src="https://github.com/Dan-DH/npProject/blob/master/client/src/assets/images/gitBanner.png"/>
 
 ## Connect with fellow geeks/nerds/cool people.
 
@@ -25,8 +25,8 @@ Pages:
 - Password recovery. Allows the user to input the email and get a password recovery email. After submission it redirects the user to the login page.
 
 ## Site sketch design
-<img src="https://github.com/Dan-DH/npProject/blob/master/client/src/static/images/sketch3.jpg" width="600"/>
-<img src="https://github.com/Dan-DH/npProject/blob/master/client/src/static/images/sketch2.jpg" width="600"/>
+<img src="https://github.com/Dan-DH/npProject/blob/master/client/src/assets/images/sketch3.jpg" width="600"/>
+<img src="https://github.com/Dan-DH/npProject/blob/master/client/src/assets/images/sketch2.jpg" width="600"/>
 
 ## Tools
 - MongoDB
