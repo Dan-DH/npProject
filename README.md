@@ -1,5 +1,6 @@
-# GeekOut
-GeekOut is a platform to connect with fellow geeks/nerds/cool people. 
+<img src="https://github.com/Dan-DH/npProject/blob/master/client/src/static/images/gitBanner.png?raw=true"/>
+
+## Connect with fellow geeks/nerds/cool people.
 
 ## How does it work
 1. Create an account using your email
@@ -24,9 +25,8 @@ Pages:
 - Password recovery. Allows the user to input the email and get a password recovery email. After submission it redirects the user to the login page.
 
 ## Site sketch design
-<img src="https://github.com/dan-dh/npProject/blob/master/sketch3.jpg?raw=true" width="600"/>
-<img src="https://github.com/dan-dh/npProject/blob/master/sketch2.jpg?raw=true" width="600"/>
-
+<img src="https://github.com/Dan-DH/npProject/blob/master/client/src/static/images/sketch3.jpg?raw=true" width="600"/>
+<img src="https://github.com/Dan-DH/npProject/blob/master/client/src/static/images/sketch2.jpg?raw=true" width="600"/>
 
 ## Tools
 - MongoDB

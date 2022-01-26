@@ -1,0 +1,45 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Playfair Display", serif;
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #a4abae;
+}
+
+.post-input::placeholder {
+  text-align: center;
+  margin: 0 10px;
+  align-self: center;
+  font-weight: 300;
+  font-size: 1rem;
+  margin: 0 5px;
+  padding-left: 10px;
+  letter-spacing: 0.1rem;
+}
+
+.post-input:focus::placeholder {
+  align-self: center;
+  outline: 0;
+  outline-style: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  padding-left: 10px;
+  letter-spacing: 0.1rem;
+}
+
+.post-input:focus {
+  outline: 0;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.1rem;
+}

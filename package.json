@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.10.0",
     "@typescript-eslint/parser": "^5.10.0",
@@ -161,11 +162,25 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+=======
+  "name": "geekout",
+  "version": "1.0.0",
+  "description": "GeekOut is a platform to connect with fellow geeks/nerds/cool people.",
+  "main": "server.js",
+  "scripts": {
+    "client-install": "npm install --prefix client",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "cd client && npm install && npm run build"
+>>>>>>> 004ab0b7e8de48014932311cbc9f5fc23ca720c2
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Dan-DH/npProject.git"
   },
+<<<<<<< HEAD
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -173,4 +188,27 @@
     "url": "https://github.com/Dan-DH/npProject/issues"
   },
   "homepage": "https://github.com/Dan-DH/npProject#readme"
+=======
+  "author": "Dan-DH",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Dan-DH/npProject/issues"
+  },
+  "homepage": "https://github.com/Dan-DH/npProject#readme",
+  "dependencies": {
+    "apollo-server-express": "^3.6.2",
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^14.2.0",
+    "express": "^4.17.2",
+    "graphql": "^16.2.0",
+    "mongoose": "^6.1.7",
+    "passport": "^0.5.2",
+    "require-dir": "^1.2.0"
+  },
+  "devDependencies": {
+    "concurrently": "^7.0.0",
+    "nodemon": "^2.0.15"
+  }
+>>>>>>> 004ab0b7e8de48014932311cbc9f5fc23ca720c2
 }
