@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { useQuery, gql } from "@apollo/client";
+import { useQuery, gql, useMutation } from "@apollo/client";
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
 import {
@@ -33,8 +33,8 @@ const SignUp = () => {
     setNewUser({ ...newUser, [e.target.name]: e.target.value });
   };
 
-  //   //navigation to go to login page after sign up
-  //   let navigate = useNavigate();
+  //navigation to go to login page after sign up
+  let navigate = useNavigate();
 
   //password validation
   let passwordMatch = useRef(false);
@@ -50,46 +50,26 @@ const SignUp = () => {
     }
   }, [newUser.password, newUser.cPassword]);
 
-  //console.log(Signup);
-  const postData = async (e) => {
-    e.preventDefault();
-    const { login, email, password } = newUser;
-    if (passwordMatch.current !== false) {
-      const SIGNUP = gql`
-      mutation {
-        createUser(username: $username, email: $email, password: $password) {
-          User {
-            id
-          }        
-        },
-      variables: {
-        "username": "${newUser.login}", "email": "${newUser.email}", "password": "${newUser.password}
+  //defining the query
+  const SIGNUP = gql`
+    mutation createUser(
+      $username: String!
+      $email: String!
+      $password: String!
+    ) {
+      createUser(username: $username, email: $email, password: $password) {
+        id
       }
-      }`;
-
-      const Signup = () => {
-        console.log("test");
-        const { loading, error, data } = useQuery(SIGNUP);
-        // if (loading) return "loading...";
-        if (error) return error.message;
-        return JSON.stringify(data);
-      };
-
-      // if (res.ok) {
-      //   console.log("Successful Registration");
-      //   //moving to login page once signup is successful using navigate
-      //   navigate("../Login");
-      // } else {
-      //   setErrorMessage("User name / Email already in use!");
-      //   console.log("Invalid Registration");
-      // }
-      console.log("register");
-    } else {
-      setErrorMessage("Passwords do not match!");
-      console.log("Invalid Registration due to password mismatch");
     }
-  };
+  `;
 
+  //destructuring the newUser object
+  const { login, email, password } = newUser;
+  const [addUser, { data, loading, error }] = useMutation(SIGNUP);
+  if (loading) return "Submitting...";
+  if (error) return error.message;
+
+  //return form
   return (
     <div>
       <GridSignup>
@@ -97,7 +77,23 @@ const SignUp = () => {
           <Col1Signup />
           <Col2Signup>
             <h1>Create your account</h1>
-            <form onSubmit={postData}>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (passwordMatch.current === true) {
+                  addUser({
+                    variables: {
+                      username: login,
+                      email: email,
+                      password: password,
+                    },
+                  });
+                  navigate("../login");
+                } else {
+                  setErrorMessage("Passwords do not match");
+                }
+              }}
+            >
               <Label>User Name</Label>
               <br />
               <Input

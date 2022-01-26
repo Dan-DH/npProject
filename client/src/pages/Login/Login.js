@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router";
 import {
   GridLogin,
   RowLogin,
@@ -11,9 +12,9 @@ import {
   StyledLink,
 } from "../../components/Forms/StyledLink.styled";
 import { Label } from "../../components/Forms/Label.styled";
-import { useNavigate } from "react-router";
 import { useState } from "react";
 import { Input } from "../../components/Forms/Input.styled";
+import { useQuery, gql, useMutation } from "@apollo/client";
 //const LogIn = ({ auth, setAuth, user, setUser, coolDan, setCoolDan }) => {
 
 //   const [errorMessage, setErrorMessage] = useState("");
@@ -54,6 +55,33 @@ import { Input } from "../../components/Forms/Input.styled";
 //     }
 //   };
 const LogIn = () => {
+  //navigation to go to home page after sign up
+  const [errorMessage, setErrorMessage] = useState("");
+  const [userLog, setUserLog] = useState({
+    login: "",
+    password: "",
+  });
+
+  let navigate = useNavigate();
+
+  const LOGIN = gql`
+    mutation Login($username: String!, $password: String!) {
+      login(username: $username, password: $password) {
+        id
+      }
+    }
+  `;
+  // const [logUser, { data, loading, error }] = useQuery(LOGIN);
+  // if (loading) return "Submitting...";
+  // if (error) return error.message;
+  const [logUser] = useMutation(LOGIN);
+
+  const handleInputs = (e) => {
+    var name = e.target.name;
+    var value = e.target.value;
+    setUserLog({ ...userLog, [name]: value });
+  };
+
   return (
     <div>
       <GridLogin>
@@ -61,14 +89,27 @@ const LogIn = () => {
           <Col1Login />
           <Col2Login>
             <h1>Log in</h1>
-            <form>
+            <form
+              onSubmit={async (e) => {
+                e.preventDefault();
+                const { data, error, loading } = await logUser({
+                  variables: {
+                    username: userLog.login,
+                    password: userLog.password,
+                  },
+                });
+                console.log(userLog);
+                console.log(data);
+                navigate("../home");
+              }}
+            >
               <Label>User name</Label>
               <br />
               <Input
                 type="text"
                 name="login"
                 placeholder="Enter your user name"
-                // onChange={handleInputs}
+                onChange={handleInputs}
               ></Input>
               <br />
               <Label>Password</Label>
@@ -77,7 +118,7 @@ const LogIn = () => {
                 type="password"
                 name="password"
                 placeholder="Enter your password"
-                // onChange={handleInputs}
+                onChange={handleInputs}
                 title="User name or password is incorrect!"
               ></Input>
               <br />

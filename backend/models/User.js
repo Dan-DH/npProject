@@ -3,8 +3,8 @@ const { eventSchema } = require("./Event");
 
 //const { EventSchema } = require("./Event");
 const userSchema = new Schema({
-  username: { type: String, required: true },
-  email: { type: String, required: true },
+  username: { type: String, required: true, unique: true },
+  email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   acc_date: { type: Date, default: Date.now },
   profile_spic: String,

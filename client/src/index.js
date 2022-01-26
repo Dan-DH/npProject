@@ -16,18 +16,18 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-client
-  .query({
-    query: gql`
-      query Query {
-        getUsers {
-          id
-          username
-        }
-      }
-    `,
-  })
-  .then((res) => console.log(res));
+// client
+//   .query({
+//     query: gql`
+//       query Query {
+//         getUsers {
+//           id
+//           username
+//         }
+//       }
+//     `,
+//   })
+//   .then((res) => console.log(res));
 
 ReactDOM.render(
   <React.StrictMode>
