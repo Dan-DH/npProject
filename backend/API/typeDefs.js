@@ -18,6 +18,7 @@ const typeDefs = gql`
     ban_status: Int!
     ban_timer: Int!
     events: [Event]!
+    token: String
   }
 
   type Event {
@@ -62,6 +63,8 @@ const typeDefs = gql`
     ): Event
 
     login(username: String!, password: String!): User
+
+    passRecovery(email: String!): User
   }
 `;
 

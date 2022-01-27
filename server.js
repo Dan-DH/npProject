@@ -21,6 +21,11 @@ const starServer = async () => {
     typeDefs,
     //mocks: true,
     resolvers,
+    context: ({ req, res }) => {
+      // const token = req.headers.authorization || "";
+      // const user = getUser(token);
+      return { req, res };
+    },
   });
 
   const app = express();
@@ -31,13 +36,6 @@ const starServer = async () => {
     .catch((err) => console.log(err));
 
   await server.start();
-
-  // const corsOptions = {
-  //   origin: "*",
-  //   credentials: true,
-  // };
-
-  // app.use(cors(corsOptions));
 
   server.applyMiddleware({ app, path: "/graphql" });
 

@@ -78,10 +78,10 @@ const SignUp = () => {
           <Col2Signup>
             <h1>Create your account</h1>
             <form
-              onSubmit={(e) => {
+              onSubmit={async (e) => {
                 e.preventDefault();
                 if (passwordMatch.current === true) {
-                  addUser({
+                  await addUser({
                     variables: {
                       username: login,
                       email: email,

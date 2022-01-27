@@ -68,12 +68,11 @@ const LogIn = () => {
     mutation Login($username: String!, $password: String!) {
       login(username: $username, password: $password) {
         id
+        token
       }
     }
   `;
-  // const [logUser, { data, loading, error }] = useQuery(LOGIN);
-  // if (loading) return "Submitting...";
-  // if (error) return error.message;
+
   const [logUser] = useMutation(LOGIN);
 
   const handleInputs = (e) => {
@@ -98,8 +97,8 @@ const LogIn = () => {
                     password: userLog.password,
                   },
                 });
-                console.log(userLog);
                 console.log(data);
+                console.log(data.token);
                 navigate("../home");
               }}
             >
