@@ -7,11 +7,11 @@ import {
   Col2Login,
 } from "../../components/Forms/GridLogin.styled";
 import { StyledButton } from "../../components/Forms/Button.styled";
-import {
-  StyledLinkDiv,
-  StyledLink,
-} from "../../components/Forms/StyledLink.styled";
-import { Label } from "../../components/Forms/Label.styled";
+// import {
+//   StyledLinkDiv,
+//   StyledLink,
+// } from "../../components/Forms/StyledLink.styled";
+// import { Label } from "../../components/Forms/Label.styled";
 import { useState } from "react";
 import { Input } from "../../components/Forms/Input.styled";
 import { gql, useMutation } from "@apollo/client";
@@ -48,14 +48,16 @@ const PassRecovery = () => {
             <form
               onSubmit={async (e) => {
                 e.preventDefault();
-                const { data, error, loading } = await passRecovery({
-                  variables: {
-                    email: userEmail.email,
-                  },
-                });
-                console.log(data);
-                console.log(userEmail);
-                navigate("../login");
+                if (userEmail.email !== "") {
+                  const { data, error, loading } = await passRecovery({
+                    variables: {
+                      email: userEmail.email,
+                    },
+                  });
+                  navigate("../login");
+                } else {
+                  setErrorMessage("Email cannot be empty");
+                }
               }}
             >
               <Input
@@ -67,7 +69,7 @@ const PassRecovery = () => {
               ></Input>
               <br />
               <br />
-              {/* <p style={{ color: "#9B0000" }}> {errorMessage}</p> */}
+              <p style={{ color: "#9B0000" }}> {errorMessage}</p>
               <StyledButton>Request password</StyledButton>
             </form>
             {/* <StyledLinkDiv>

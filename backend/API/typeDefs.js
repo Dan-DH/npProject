@@ -11,13 +11,14 @@ const typeDefs = gql`
     email: String!
     password: String!
     acc_date: Date!
-    profile_pic: String
+    profile_pic: String #or obj? or image?
     bio: String
     moderator: Boolean!
     supporter: Boolean!
     ban_status: Int!
     ban_timer: Int!
-    events: [Event]!
+    #myEvents: [Event]!
+    attendingEvents: [String]!
     token: String
   }
 
@@ -39,14 +40,17 @@ const typeDefs = gql`
 
   type Query {
     getEvents: [Event]
+
     getUsers: [User]
-    getEvent(id: String): Event
-    getUser(id: String): User
+
+    getEvent(id: ID!): Event #this might need to be string instead of ID, not sure
+    getUser(id: ID!): User
   }
 
   type Mutation {
     createUser(username: String!, email: String!, password: String!): User
 
+    #FIXME: dates
     createEvent(
       ev_organizer: String!
       ev_name: String!
@@ -64,7 +68,48 @@ const typeDefs = gql`
 
     login(username: String!, password: String!): User
 
+    #TODO: set recovery logic
+    #TODO: send email
     passRecovery(email: String!): User
+
+    #TODO: send emails to event participants
+    deleteEvent(id: ID!): String!
+
+    deleteUser(id: ID!): String!
+
+    #TODO: add logic. If max attendants, add 'Event full' to # participants and change button to 'Join waitlist'
+    attend(userId: ID!, eventId: ID!): String!
+
+    #TODO: this action triggers:
+    # -first person (fp) in the waiting list gets added to the event
+    # -fp is removed from waiting list
+    # -fp receives an email informing them that they are now part of the event
+    #String!
+    unattend(userId: ID!, eventId: ID!): String!
+
+    #TODO: send emails to all participants
+    changeInfoUser(
+      userId: ID!
+      username: String!
+      email: String!
+      password: String
+      profile_pic: String!
+    ): User
+
+    #TODO: add dates to this resolver
+    #TODO: add logic for max participants (can't reduce max number below number of current participants)
+    #TODO: add logic for date (can't set event in the past)
+    changeInfoEvent(
+      eventId: ID!
+      ev_name: String!
+      ev_type: String!
+      ev_language: String
+      ev_online: Boolean!
+      ev_location: String!
+      ev_description: String
+      ev_participants: [String]!
+      ev_max_participants: Int
+    ): Event
   }
 `;
 

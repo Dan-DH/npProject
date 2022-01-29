@@ -13,7 +13,8 @@ const userSchema = new Schema({
   supporter: { type: Boolean, default: false },
   ban_status: { type: Number, default: 0 }, //0 okay, 1 temp ban, 2 perm ban
   ban_timer: { type: Number, default: 0 }, //# days of temp ban
-  events: [eventSchema],
+  //myEvents: [eventSchema], //this might not be needed
+  attendingEvents: [String],
 });
 
 const User = model("users", userSchema);

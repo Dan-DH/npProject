@@ -91,15 +91,17 @@ const LogIn = () => {
             <form
               onSubmit={async (e) => {
                 e.preventDefault();
-                const { data, error, loading } = await logUser({
-                  variables: {
-                    username: userLog.login,
-                    password: userLog.password,
-                  },
-                });
-                console.log(data);
-                console.log(data.token);
-                navigate("../home");
+                if (userLog.login !== "" && userLog.password !== "") {
+                  const { data, error, loading } = await logUser({
+                    variables: {
+                      username: userLog.login,
+                      password: userLog.password,
+                    },
+                  });
+                  navigate("../home");
+                } else {
+                  setErrorMessage("Username / password cannot be empty");
+                }
               }}
             >
               <Label>User name</Label>
@@ -121,7 +123,7 @@ const LogIn = () => {
                 title="User name or password is incorrect!"
               ></Input>
               <br />
-              {/* <p style={{ color: "#9B0000" }}> {errorMessage}</p> */}
+              <p style={{ color: "#9B0000" }}> {errorMessage}</p>
               <StyledButton>Log In</StyledButton>
             </form>
             {/* <StyledLinkDiv>

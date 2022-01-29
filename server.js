@@ -22,9 +22,7 @@ const starServer = async () => {
     //mocks: true,
     resolvers,
     context: ({ req, res }) => {
-      // const token = req.headers.authorization || "";
-      // const user = getUser(token);
-      return { req, res };
+      ({ req, res });
     },
   });
 

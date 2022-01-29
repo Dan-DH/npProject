@@ -80,18 +80,24 @@ const SignUp = () => {
             <form
               onSubmit={async (e) => {
                 e.preventDefault();
-                if (passwordMatch.current === true) {
-                  await addUser({
-                    variables: {
-                      username: login,
-                      email: email,
-                      password: password,
-                    },
-                  });
-                  navigate("../login");
-                } else {
-                  setErrorMessage("Passwords do not match");
+                if (login === "" || email === "" || password === "") {
+                  setErrorMessage("Fields cannot be empty");
+                  return false;
                 }
+
+                if (passwordMatch.current === false) {
+                  setErrorMessage("Passwords do not match");
+                  return false;
+                }
+
+                await addUser({
+                  variables: {
+                    username: login,
+                    email: email,
+                    password: password,
+                  },
+                });
+                navigate("../login");
               }}
             >
               <Label>User Name</Label>
