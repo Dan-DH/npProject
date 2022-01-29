@@ -19,10 +19,11 @@ function App() {
         <Route exact path="/login" element={<LogIn />} />
         <Route exact path="/signup" element={<SignUp />} />
         <Route exact path="/home" element={<Home />} />
-        <Route exact path="/profile" element={<Profile />} />
-        {/* <Route exact path="/profile/:id" element={<Profile />} /> */}
+        <Route exact path="/profile/me" element={<Profile />} />
+        {/* <Route path="/profile/*" element={<Profile />} /> */}
         <Route exact path="/settings" element={<Settings />} />
         <Route exact path="/password-recovery" element={<PassRecovery />} />
+        {/* <Route path="/password-reset/*" element={<ResetPass />} /> */}
       </Routes>
     </div>
   );
