@@ -1,4 +1,4 @@
-const { gql } = require("apollo-server-express");
+const { gql } = require("apollo-server");
 //const { GraphQLScalarType, Kind } = require("graphql");
 const Event = require("../models/Event");
 
@@ -43,7 +43,8 @@ const typeDefs = gql`
 
     getUsers: [User]
 
-    getEvent(id: ID!): Event #this might need to be string instead of ID, not sure
+    getEvent(id: ID!): Event
+
     getUser(id: ID!): User
   }
 
@@ -71,6 +72,9 @@ const typeDefs = gql`
     #TODO: set recovery logic
     #TODO: send email
     passRecovery(email: String!): User
+
+    #TODO: set email and parameter/token logic
+    passwordReset(id: ID!, token: String!, password: String!): String!
 
     #TODO: send emails to event participants
     deleteEvent(id: ID!): String!

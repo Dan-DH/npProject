@@ -2,26 +2,29 @@ const { Event } = require("../models/Event");
 const { User } = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { UserInputError } = require("apollo-server-express");
+// const { UserInputError } = require("apollo-server-express");
+const { ApolloServer, UserInputError } = require("apollo-server");
 const checkAuth = require("../utils/checkAuth");
+const { passRecoveryEmail } = require("../API/mailer/mailer");
 
 const secret = process.env.SECRET;
 
 const resolvers = {
   Query: {
-    //Returns list of all events in the database
-    async getEvents() {
+    //RETURNS ALL EVENTS
+    async getEvents(_, args, context) {
       try {
-        const events = await Event.find();
+        //checkAuth(context); TODO: comment in checkAuth
+        const events = await Event.find(); //TODO: order them by start date
         return events;
       } catch (err) {
         throw new Error(err);
       }
     },
-    //Returns a specific event
-    async getEvent(_, { id }) {
-      //id deconstructed from args
+    //GET SPECIFIC EVENT
+    async getEvent(_, { id }, context) {
       try {
+        //checkAuth(context);
         const event = await Event.findOne({ _id: id });
         return event;
       } catch (err) {
@@ -29,19 +32,20 @@ const resolvers = {
       }
     },
 
-    //Returns list of all users in the database
-    async getUsers() {
+    //GET ALL USERS
+    async getUsers(_, args, context) {
       try {
+        //checkAuth(context);
         const users = await User.find(); //{}, { password: 0 }
         return users;
       } catch (err) {
         throw new Error(err);
       }
     },
-    //Returns a specific event
-    async getUser(_, { id }) {
-      //id deconstructed from args
+    //GET SPECIFIC USER
+    async getUser(_, { id }, context) {
       try {
+        //checkAuth(context);
         const user = await User.findOne({ _id: id });
         return user;
       } catch (err) {
@@ -51,6 +55,7 @@ const resolvers = {
   },
 
   Mutation: {
+    //CREATE NEW USER
     async createUser(_, { username, email, password }) {
       password = await bcrypt.hash(password, 10);
 
@@ -63,6 +68,7 @@ const resolvers = {
       return newUser;
     },
 
+    //CREATE NEW EVENT
     createEvent: (
       _,
       {
@@ -76,8 +82,10 @@ const resolvers = {
         ev_location,
         ev_description,
         ev_max_participants,
-      }
+      },
+      context
     ) => {
+      //checkAuth(context);
       const newEvent = Event.create({
         ev_organizer,
         ev_name,
@@ -95,6 +103,7 @@ const resolvers = {
       return newEvent;
     },
 
+    //USER LOGIN
     async login(_, { username, password }, { req, res }) {
       const user = await User.findOne({ username });
 
@@ -120,50 +129,116 @@ const resolvers = {
       return { ...user._doc, id: user._id, token };
     },
 
+    //PASSWORD RECOVERY
     async passRecovery(_, { email }) {
       const user = await User.findOne({ email });
-      if (!user) return null;
-      //TODO: sending emails
+
+      if (!user) throw new Error("User does not exist");
+
+      const passSecret = secret + user.password;
+
+      const payload = {
+        id: user._id,
+        email: user.email,
+      };
+
+      const emailToken = jwt.sign(payload, passSecret, { expiresIn: "15m" });
+      const link = `http://localhost:3000/password-reset/${user.id}/${emailToken}`;
+      console.log(link);
+
+      //add token to user object
+      const addToken = await User.findOneAndUpdate(
+        { _id: user.id },
+        { $set: { token: emailToken } }
+      );
+
+      passRecoveryEmail(user.email, link);
+      //TODO: react. Add message 'email has been sent'
+
+      return addToken; //it's working
     },
 
-    async deleteUser(_, { id }) {
+    //PASSWORD RESET
+    async passwordReset(_, { id, token, password }) {
+      const user = await User.findById({ _id: id });
+
+      if (!user) throw new Error("User does not exist");
+
+      const passSecret = secret + user.password;
+
+      try {
+        const payload = jwt.verify(token, passSecret);
+        password = await bcrypt.hash(password, 10);
+        await User.findOneAndUpdate({ _id: id }, { $set: { password } });
+        return "Password updated";
+      } catch (error) {
+        console.log(error);
+      }
+
+      // const dbToken = user.token + user.id;
+      //if (dbToken !== token) throw new Error("Invalid/expired token");
+    },
+
+    //DELETE USER
+    async deleteUser(_, { id }, context) {
+      //checkAuth(context);
       const user = await User.deleteOne({ _id: id });
       //TODO: add logic (can't always return success)
-      return "User succesfully deleted";
+      return "User deleted";
     },
 
-    async deleteEvent(_, { id }) {
+    //DELETE EVENT
+    async deleteEvent(_, { id }, context) {
+      //checkAuth(context);
       const event = await Event.deleteOne({ _id: id });
       if (event.deletedCount === 0) throw new Error("Event doesn't exist");
       //TODO: add send email, then return
-      return "Event succesfully deleted";
+      return "Event deleted";
     },
 
-    async attend(_, { userId, eventId }) {
+    //USER EVENT SIGNUP
+    async attend(_, { userId, eventId }, context) {
+      //checkAuth(context);
       const check = await User.findOne({ _id: userId });
       if (check.attendingEvents.includes(eventId)) {
-        throw new Error("You are already attending the event");
+        const attend = await User.updateOne(
+          { _id: userId },
+          {
+            $pull: {
+              attendingEvents: eventId,
+            },
+          }
+        );
+
+        const event = await Event.updateOne(
+          { _id: eventId },
+          {
+            $pull: {
+              ev_participants: userId,
+            },
+          }
+        );
+      } else {
+        const attend = await User.updateOne(
+          { _id: userId },
+          {
+            $push: {
+              attendingEvents: eventId,
+            },
+          }
+        );
+
+        const event = await Event.updateOne(
+          { _id: eventId },
+          {
+            $push: {
+              ev_participants: userId,
+            },
+          }
+        );
       }
 
-      const attend = await User.updateOne(
-        { _id: userId },
-        {
-          $push: {
-            attendingEvents: eventId,
-          },
-        }
-      );
-
-      const event = await Event.updateOne(
-        { _id: eventId },
-        {
-          $push: {
-            ev_participants: userId,
-          },
-        }
-      );
-
-      return "Succesfully added";
+      return "Operation successful";
     },
   },
 };

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import img from "../../assets/images/scifiBanner.jpg";
 //import img from "../../assets/images/hackedBanner.jpg";
 import { DeviceMax, DeviceMin } from "../Breakpoints";
+
 export const GridLogin = styled.div``;
 
 export const RowLogin = styled.div`
@@ -9,7 +10,7 @@ export const RowLogin = styled.div`
   flex-direction: row;
   background: #ffffff;
   margin: auto;
-  box-shadow: 5px 3px 20px 3px #cbcdcf;
+
   @media ${DeviceMax.sm} {
     background-image: url(${img});
     background-repeat: no-repeat;

@@ -5,29 +5,21 @@ import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
+  createHttpLink,
   useQuery,
   useMutation,
   gql,
 } from "@apollo/client";
 import { BrowserRouter } from "react-router-dom";
 
-const client = new ApolloClient({
+const httLink = createHttpLink({
   uri: "http://localhost:5000/graphql",
-  cache: new InMemoryCache(),
 });
 
-// client
-//   .query({
-//     query: gql`
-//       query Query {
-//         getUsers {
-//           id
-//           username
-//         }
-//       }
-//     `,
-//   })
-//   .then((res) => console.log(res));
+const client = new ApolloClient({
+  link: httLink,
+  cache: new InMemoryCache(),
+});
 
 ReactDOM.render(
   <React.StrictMode>

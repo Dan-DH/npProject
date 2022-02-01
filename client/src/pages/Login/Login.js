@@ -55,13 +55,13 @@ import { useQuery, gql, useMutation } from "@apollo/client";
 //     }
 //   };
 const LogIn = () => {
-  //navigation to go to home page after sign up
   const [errorMessage, setErrorMessage] = useState("");
   const [userLog, setUserLog] = useState({
     login: "",
     password: "",
   });
 
+  //redirects to home on login
   let navigate = useNavigate();
 
   const LOGIN = gql`
@@ -126,10 +126,8 @@ const LogIn = () => {
               <p style={{ color: "#9B0000" }}> {errorMessage}</p>
               <StyledButton>Log In</StyledButton>
             </form>
-            {/* <StyledLinkDiv>
-              Don't have an account?{" "}
-              <StyledLink to="../Signup">Sign Up</StyledLink>
-            </StyledLinkDiv> */}
+            Don't have an account yet?
+            <StyledLink to="../Signup"> Sign Up</StyledLink>
           </Col2Login>
         </RowLogin>
       </GridLogin>

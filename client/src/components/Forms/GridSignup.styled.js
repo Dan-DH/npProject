@@ -9,7 +9,7 @@ export const RowSignup = styled.div`
   flex-direction: row;
   background: #ffffff;
   margin: auto;
-  box-shadow: 5px 3px 20px 3px #cbcdcf;
+
   @media ${DeviceMax.sm} {
     background-image: url(${img5});
     background-repeat: no-repeat;

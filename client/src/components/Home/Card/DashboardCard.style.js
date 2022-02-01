@@ -1,0 +1,89 @@
+import styled from "styled-components";
+import { DeviceMin } from "../../Breakpoints";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+export const CardContainerList = styled.li`
+  list-style: none;
+  margin: 2vh 0;
+`;
+
+export const CardContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 70%;
+  height: 10vh;
+`;
+
+export const CardImage = styled.div`
+  background-color: #b32201;
+  width: 15%;
+  text-align: center;
+`;
+
+export const CardImageIcon = styled(FontAwesomeIcon)`
+  color: white;
+  font-size: 7vh;
+  margin-top: 1vh;
+`;
+
+export const InfoBox = styled.div`
+  width: 70%;
+  background-color: #353944;
+  color: white;
+  padding: 0 1vh;
+`;
+
+export const CardTitle = styled.h2``;
+
+export const CardDescription = styled.p``;
+
+export const CardLocation = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+export const LocationIcon = styled(FontAwesomeIcon)`
+  color: white;
+  font-size: 2vh;
+`;
+
+export const LocationText = styled.p`
+  margin-left: 1vh;
+`;
+
+export const DatesDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+export const CardStartDate = styled.p``;
+
+export const CardEndDate = styled.p`
+  margin: 0 0 0 1vh;
+`;
+
+export const CardParticipants = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+export const ParticipantsIcon = styled(FontAwesomeIcon)`
+  color: white;
+  font-size: 2vh;
+`;
+
+export const NumberOfParticipants = styled.p`
+  margin: 0 0 0 1vh;
+`;
+
+export const UserIconContainer = styled.div`
+  cursor: pointer;
+  width: 15%;
+  text-align: center;
+`;
+
+export const UserIcon = styled(FontAwesomeIcon)`
+  color: white;
+  font-size: 7vh;
+  margin-top: 1vh;
+`;

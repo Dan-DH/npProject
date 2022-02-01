@@ -5,15 +5,28 @@
   padding: 0;
 }
 
+@font-face {
+  font-family: "Lato Black";
+  src: url("./assets/fonts/Lato-Black.eot") format("eot"),
+    url("./assets/fonts/Lato-Black.woff") format("woff"),
+    url("./assets/fonts/Lato-Black.ttf") format("truetype"),
+    url("./assets/fonts/Lato-Black.svg#Lato-Black") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
-  font-family: "Playfair Display", serif;
+  font-family: "Lato Black";
 }
 
 .page-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #a4abae;
+  /* background-color: #4cddfe; */
+  background-image: url("./assets/images/bgShelf.webp");
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .post-input::placeholder {

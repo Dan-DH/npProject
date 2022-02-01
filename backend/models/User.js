@@ -15,6 +15,7 @@ const userSchema = new Schema({
   ban_timer: { type: Number, default: 0 }, //# days of temp ban
   //myEvents: [eventSchema], //this might not be needed
   attendingEvents: [String],
+  token: String,
 });
 
 const User = model("users", userSchema);

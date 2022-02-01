@@ -22,15 +22,23 @@
   },
   "homepage": "https://github.com/Dan-DH/npProject#readme",
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@fortawesome/react-fontawesome": "^0.1.17",
+    "apollo-server": "^3.6.2",
     "apollo-server-express": "^3.6.2",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "dotenv": "^14.2.0",
     "express": "^4.17.2",
+    "googleapis": "^92.0.0",
     "graphql": "^16.2.0",
+    "graphql-tag": "^2.12.6",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.1.7",
+    "nodemailer": "^6.7.2",
     "passport": "^0.5.2",
+    "react-token-auth": "^2.3.8",
     "require-dir": "^1.2.0"
   },
   "devDependencies": {

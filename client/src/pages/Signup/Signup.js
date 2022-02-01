@@ -147,10 +147,8 @@ const SignUp = () => {
               <p style={{ color: "#9B0000" }}> {errorMessage}</p>
               <StyledButton>Sign Up</StyledButton>
             </form>
-            {/* <StyledLinkDiv>
-              Already have an account?{" "}
-              <StyledLink to="../Login">Log In</StyledLink>
-            </StyledLinkDiv> */}
+            Already got an account?
+            <StyledLink to="../Login"> Log In</StyledLink>
           </Col2Signup>
         </RowSignup>
       </GridSignup>
