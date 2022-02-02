@@ -11,23 +11,16 @@ import {
   TextArea,
 } from "./CreateEvent.Style";
 
-import { useQuery, gql, useMutation } from "@apollo/client";
+import { gql, useMutation } from "@apollo/client";
 
-const CreateEvent = ({
-  eventCards,
-  user,
-  loading,
-  data,
-  trigger,
-  setTrigger,
-}) => {
+const CreateEvent = () => {
   const [eventLog, setEventLog] = useState({
     evOrganizer: "61f27e57bc5b29fa650b2667",
     evName: "",
-    evType: "",
-    evOnline: "",
+    evType: "Boardgames",
+    evOnline: "false",
     evLocation: "",
-    evParticipants: 0,
+    evMaxParticipants: 0,
   });
 
   const CREATE_EVENT = gql`
@@ -35,9 +28,9 @@ const CreateEvent = ({
       $evOrganizer: String!
       $evName: String!
       $evType: String!
-      $evOnline: Boolean!
+      $evOnline: String!
       $evLocation: String!
-      $evParticipants: [String]!
+      $evMaxParticipants: Int!
     ) {
       createEvent(
         ev_organizer: $evOrganizer
@@ -45,7 +38,7 @@ const CreateEvent = ({
         ev_type: $evType
         ev_online: $evOnline
         ev_location: $evLocation
-        ev_participants: $evParticipants
+        ev_max_participants: $evMaxParticipants
       ) {
         id
       }
@@ -57,6 +50,7 @@ const CreateEvent = ({
   const handleInputs = (e) => {
     setEventLog({ ...eventLog, [e.target.name]: e.target.value });
     console.log(e.target.name);
+    console.log(e.target.value);
   };
 
   return (
@@ -70,12 +64,12 @@ const CreateEvent = ({
             console.log(eventLog);
             await logEvent({
               variables: {
-                ev_organizer: eventLog.evOrganizer,
-                ev_name: eventLog.evName,
-                ev_type: eventLog.evType,
-                ev_online: eventLog.evOnline,
-                ev_location: eventLog.evLocation,
-                ev_participants: [eventLog.evParticipants],
+                evOrganizer: eventLog.evOrganizer,
+                evName: eventLog.evName,
+                evType: eventLog.evType,
+                evOnline: eventLog.evOnline,
+                evLocation: eventLog.evLocation,
+                evMaxParticipants: parseInt(eventLog.evMaxParticipants),
                 //   ev_description: eventLog.evDescription,
               },
             });
@@ -92,13 +86,13 @@ const CreateEvent = ({
           <p>Event type</p>
           <FormSelect name="evType" onChange={handleInputs}>
             <FormOption value="Boardgames" name="evType">
-              Boardgames
-            </FormOption>
-            <FormOption value="CardGames" name="evType">
-              Card games
+              Board games
             </FormOption>
             <FormOption value="Hangout" name="evType">
               Hangout
+            </FormOption>
+            <FormOption value="Roleplaying" name="evType">
+              Role games
             </FormOption>
             <FormOption value="Videogames" name="evType">
               Videogames
@@ -108,11 +102,11 @@ const CreateEvent = ({
         <Label>
           <p>Online?</p>
           <FormSelect name="evOnline" onChange={handleInputs}>
-            <FormOption value={true} name="evOnLine">
-              Online
-            </FormOption>
             <FormOption value={false} name="evOnLine">
               In person
+            </FormOption>
+            <FormOption value={true} name="evOnLine">
+              Online
             </FormOption>
           </FormSelect>
         </Label>
@@ -130,13 +124,17 @@ const CreateEvent = ({
         </Label>
         <Label>
           <p>Max participants</p>
-          <Input type="number" name="evParticipants" onChange={handleInputs} />
+          <Input
+            type="number"
+            name="evMaxParticipants"
+            onChange={handleInputs}
+          />
         </Label>
         <Label>
           <p>Event description</p>
           <TextArea name="evDescription" onChange={handleInputs} />
         </Label>
-        <Submit type="submit" value="Create" />
+        <Submit>Create</Submit>
       </FormForm>
     </FormContainer>
   );

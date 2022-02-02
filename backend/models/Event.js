@@ -5,7 +5,7 @@ const eventSchema = new Schema({
   ev_name: String,
   ev_type: String,
   ev_language: String,
-  ev_online: Boolean,
+  ev_online: String,
   ev_creation_date: { type: Date, default: Date.now },
   ev_start_date: Date,
   ev_end_date: Date,

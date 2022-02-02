@@ -40,7 +40,7 @@ function Card({ event, user, trigger, setTrigger }) {
     Videogames: faGamepad,
   };
 
-  const onLine = event.ev_online ? faWifi : faMapMarkedAlt;
+  const onLine = event.ev_online === "true" ? faWifi : faMapMarkedAlt;
 
   const [isAttending, setIsAttending] = useState(
     event.ev_participants.includes(user)

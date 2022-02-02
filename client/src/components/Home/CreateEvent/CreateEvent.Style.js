@@ -29,7 +29,7 @@ export const Label = styled.label`
   background-color: #b32201;
 `;
 
-export const Submit = styled.input`
+export const Submit = styled.button`
   margin-top: 1vh;
   width: 20vh;
   height: 5vh;

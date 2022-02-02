@@ -28,7 +28,7 @@ const typeDefs = gql`
     ev_name: String!
     ev_type: String!
     ev_language: String
-    ev_online: Boolean!
+    ev_online: String!
     ev_creation_date: Date #make compulsory
     ev_start_date: Date
     ev_end_date: Date
@@ -55,16 +55,16 @@ const typeDefs = gql`
     createEvent(
       ev_organizer: String!
       ev_name: String!
-      # ev_type: String!
+      ev_type: String!
       ev_language: String
-      # ev_online: Boolean!
+      ev_online: String!
       # ev_creation_date: Date!
       # ev_start_date: Date!
       # ev_end_date: Date!
       ev_location: String!
       ev_description: String
-      ev_participants: [String]!
-      ev_max_participants: Int
+      ev_participants: [String]
+      ev_max_participants: Int!
     ): Event
 
     login(username: String!, password: String!): User
@@ -108,7 +108,7 @@ const typeDefs = gql`
       ev_name: String!
       ev_type: String!
       ev_language: String
-      ev_online: Boolean!
+      ev_online: String!
       ev_location: String!
       ev_description: String
       ev_participants: [String]!

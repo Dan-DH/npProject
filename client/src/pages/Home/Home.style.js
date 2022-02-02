@@ -24,6 +24,7 @@ export const LeftCol = styled.div`
 export const RightCol = styled.div`
   //   background-color: lightgrey;
   width: 60%;
+  overflow: scroll;
 `;
 // export const Dashboard = styled.div`
 //   background-color: teal;
