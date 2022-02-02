@@ -4,13 +4,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const CardContainerList = styled.li`
   list-style: none;
-  margin: 2vh 0;
 `;
 
 export const CardContainer = styled.div`
+  margin: 2vh auto 2vh auto;
   display: flex;
   flex-direction: row;
-  width: 70%;
+  width: 90%;
   height: 10vh;
 `;
 

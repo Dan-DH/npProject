@@ -1,11 +1,11 @@
 import { React, useEffect, useState } from "react";
-import { CreateEvent } from "../../components/Home/CreateEvent/CreateEvent";
+import CreateEvent from "../../components/Home/CreateEvent/CreateEvent";
 import { Calendar } from "../../components/Home/Calendar/Calendar";
 import MyEvents from "../../components/Home/MyEvents/MyEvents";
 import { Filters } from "../../components/Home/Filters/Filters";
 import Dashboard from "../../components/Home/Dashboard/Dashboard";
 import { HomeContainer, LeftCol, RightCol } from "./Home.style";
-import { useQuery, gql, useMutation } from "@apollo/client";
+import { useQuery, gql, useMutation, useLazyQuery } from "@apollo/client";
 
 function Home() {
   const GET_EVENTS = gql`
@@ -31,7 +31,12 @@ function Home() {
   const hermes = "61f27e57bc5b29fa650b2667"; //to take this from token.id
 
   const [eventCards, setEventCards] = useState([]);
-  const { loading, data, error } = useQuery(GET_EVENTS);
+  const [lazyEvents, { loading, data, error }] = useLazyQuery(GET_EVENTS);
+  const [trigger, setTrigger] = useState(false);
+
+  useEffect(() => {
+    lazyEvents();
+  }, [trigger]);
 
   useEffect(() => {
     if (data) {
@@ -43,13 +48,13 @@ function Home() {
     <div>
       <HomeContainer>
         <LeftCol>
-          <CreateEvent />
           <MyEvents
             eventCards={eventCards}
             user={hermes}
             loading={loading}
             data={data}
           />
+          <CreateEvent />
         </LeftCol>
         <RightCol>
           <Filters />
@@ -58,6 +63,8 @@ function Home() {
             user={hermes}
             loading={loading}
             data={data}
+            trigger={trigger}
+            setTrigger={setTrigger}
           />
         </RightCol>
       </HomeContainer>

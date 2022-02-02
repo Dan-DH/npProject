@@ -26,7 +26,7 @@ body {
   /* background-color: #4cddfe; */
   background-image: url("./assets/images/bgShelf.webp");
   background-size: cover;
-  background-repeat: no-repeat;
+  /* background-repeat: repeat; */
 }
 
 .post-input::placeholder {

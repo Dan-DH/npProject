@@ -75,6 +75,7 @@ const LogIn = () => {
 
   const [logUser] = useMutation(LOGIN);
 
+  //TODO: refactor this
   const handleInputs = (e) => {
     var name = e.target.name;
     var value = e.target.value;

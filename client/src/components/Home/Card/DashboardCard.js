@@ -32,7 +32,7 @@ import {
 } from "./DashboardCard.style";
 import { gql, useMutation } from "@apollo/client";
 
-function Card({ event, user }) {
+function Card({ event, user, trigger, setTrigger }) {
   const iconObject = {
     Boardgames: faDice,
     Hangout: faBeer,
@@ -94,6 +94,7 @@ function Card({ event, user }) {
               },
             });
             setIsAttending(!isAttending);
+            setTrigger(!trigger);
           }}
         >
           <UserIcon icon={faUser} />

@@ -11,8 +11,9 @@ export const HomeContainer = styled.div`
 export const LeftCol = styled.div`
   display: flex;
   flex-direction: column;
-  //   background-color: pink;
+  // background-color: pink;
   width: 40%;
+  overflow: scroll;
 `;
 // export const CreateEvent = styled.div`
 //   background-color: blue;

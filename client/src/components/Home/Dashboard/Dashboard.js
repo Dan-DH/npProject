@@ -8,7 +8,14 @@ import {
   DashboardTitle,
 } from "./Dashboard.style";
 
-const Dashboard = ({ eventCards, user, loading, data }) => {
+const Dashboard = ({
+  eventCards,
+  user,
+  loading,
+  data,
+  trigger,
+  setTrigger,
+}) => {
   return (
     <DashboardContainer>
       <DashboardTitle>UPCOMING EVENTS</DashboardTitle>
@@ -18,7 +25,13 @@ const Dashboard = ({ eventCards, user, loading, data }) => {
         <EventList>
           {data &&
             eventCards.map((event) => (
-              <Card key={event.id} event={event} user={user} />
+              <Card
+                key={event.id}
+                event={event}
+                user={user}
+                trigger={trigger}
+                setTrigger={setTrigger}
+              />
             ))}
         </EventList>
       )}

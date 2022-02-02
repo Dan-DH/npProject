@@ -5,7 +5,7 @@ import Card from "../Card/MyEventsCard";
 import { MyEventsContainer, EventList, MyEventsTitle } from "./MyEvents.style";
 
 const MyEvents = ({ eventCards, user, loading, data }) => {
-  var myEvents = eventCards.filter((e) => e.ev_participants.includes(user));
+  // var myEvents = eventCards.filter((e) => e.ev_participants.includes(user));
 
   return (
     <MyEventsContainer>
@@ -15,9 +15,11 @@ const MyEvents = ({ eventCards, user, loading, data }) => {
       ) : (
         <EventList>
           {data &&
-            myEvents.map((event) => (
-              <Card key={event.id} event={event} user={user} /> //to take this from token.id
-            ))}
+            eventCards
+              .filter((e) => e.ev_participants.includes(user))
+              .map((e) => (
+                <Card key={e.id} event={e} user={user} /> //to take this from token.id
+              ))}
         </EventList>
       )}
     </MyEventsContainer>

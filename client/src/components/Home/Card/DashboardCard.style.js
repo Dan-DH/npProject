@@ -8,9 +8,10 @@ export const CardContainerList = styled.li`
 `;
 
 export const CardContainer = styled.div`
+  margin: 2vh auto 2vh auto;
   display: flex;
   flex-direction: row;
-  width: 70%;
+  width: 80%;
   height: 10vh;
 `;
 

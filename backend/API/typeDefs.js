@@ -55,9 +55,9 @@ const typeDefs = gql`
     createEvent(
       ev_organizer: String!
       ev_name: String!
-      ev_type: String!
+      # ev_type: String!
       ev_language: String
-      ev_online: Boolean!
+      # ev_online: Boolean!
       # ev_creation_date: Date!
       # ev_start_date: Date!
       # ev_end_date: Date!

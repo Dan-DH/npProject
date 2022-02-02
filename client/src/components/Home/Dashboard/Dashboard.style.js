@@ -4,7 +4,7 @@ import { DeviceMin } from "../../Breakpoints";
 export const DashboardContainer = styled.div`
   //   background-color: white;
   width: 100%;
-  //   text-align: center;
+  margin-top: 5vh;
 `;
 
 export const EventList = styled.ul`
@@ -13,4 +13,10 @@ export const EventList = styled.ul`
   //   text-align: left;
 `;
 
-export const DashboardTitle = styled.h1``;
+export const DashboardTitle = styled.h1`
+  color: white;
+  text-align: center;
+  background-color: #b32201;
+  width: 80%;
+  margin: 0 auto;
+`;

@@ -29,7 +29,7 @@ import {
   CardContainerList,
   UserIcon,
   UserIconContainer,
-} from "./DashboardCard.style";
+} from "./MyEventsCard.style";
 import { useQuery, gql, useMutation } from "@apollo/client";
 
 function Card({ event, user }) {
