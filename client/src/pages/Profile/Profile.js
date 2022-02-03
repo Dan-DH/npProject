@@ -1,17 +1,19 @@
 import { React, useState } from "react";
 import { useNavigate } from "react-router";
 import { gql, useQuery, useMutation } from "@apollo/client";
+import {
+  HeaderContainer,
+  UserImageContainer,
+  UserImage,
+  UserBioContainer,
+  UserBio,
+  UserBioInput,
+  Row,
+} from "./Profile.Style";
 
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import {
-//   faDiceD20,
-//   faGamepad,
-//   faUser,
-//   faDice,
-//   faBeer,
-// } from "@fortawesome/free-solid-svg-icons";
+import Settings from "../../components/Profile/Settings";
 
-function Profile() {
+function Profile({ geek }) {
   const GET_EVENTS = gql`
     query GetEvents {
       getEvents {
@@ -25,24 +27,20 @@ function Profile() {
   const { loading, data, error } = useQuery(GET_EVENTS);
 
   return (
-    <div>
-      {loading ? (
-        <h1>Loading events..</h1>
-      ) : (
-        <ul>
-          {data &&
-            data.getEvents.map((event, index) => (
-              <li key={index}>{event.id}</li>
-            ))}
-        </ul>
-      )}
-
-      {/* <FontAwesomeIcon icon={faDiceD20} />
-      <FontAwesomeIcon icon={faGamepad} />
-      <FontAwesomeIcon icon={faUser} />
-      <FontAwesomeIcon icon={faDice} />
-      <FontAwesomeIcon icon={faBeer} /> */}
-    </div>
+    <HeaderContainer>
+      <Row>
+        <UserImageContainer>
+          <UserImage src={geek.profile_pic} alt="profile picture" />
+        </UserImageContainer>
+        <UserBioContainer>
+          <UserBio />
+          <UserBioInput></UserBioInput>
+        </UserBioContainer>
+      </Row>
+      <Row>
+        <Settings geek={geek} />
+      </Row>
+    </HeaderContainer>
   );
 }
 

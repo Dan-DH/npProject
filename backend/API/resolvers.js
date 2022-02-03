@@ -14,7 +14,8 @@ const resolvers = {
     //RETURNS ALL EVENTS
     async getEvents(_, args, context) {
       try {
-        //checkAuth(context); TODO: comment in checkAuth
+        // checkAuth(context);
+        // TODO: comment in checkAuth;
         const events = await Event.find(); //TODO: order them by start date
         return events;
       } catch (err) {
@@ -24,7 +25,7 @@ const resolvers = {
     //GET SPECIFIC EVENT
     async getEvent(_, { id }, context) {
       try {
-        //checkAuth(context);
+        checkAuth(context);
         const event = await Event.findOne({ _id: id });
         return event;
       } catch (err) {
@@ -35,17 +36,18 @@ const resolvers = {
     //GET ALL USERS
     async getUsers(_, args, context) {
       try {
-        //checkAuth(context);
+        // checkAuth(context);
         const users = await User.find(); //{}, { password: 0 }
         return users;
       } catch (err) {
         throw new Error(err);
       }
     },
+
     //GET SPECIFIC USER
     async getUser(_, { id }, context) {
       try {
-        //checkAuth(context);
+        checkAuth(context);
         const user = await User.findOne({ _id: id });
         return user;
       } catch (err) {
@@ -126,7 +128,31 @@ const resolvers = {
         { expiresIn: "1h" }
       );
 
-      return { ...user._doc, id: user._id, token };
+      return {
+        ...user._doc,
+        id: user._id,
+        token,
+      };
+    },
+
+    //USER INFO UPDATE
+    async changeInfoUser(
+      _,
+      { userId, username, email, password, profile_pic }
+    ) {
+      const props = {};
+      username !== "" ? (props.username = username.toLowerCase().trim()) : true;
+      email !== "" ? (props.email = email.toLowerCase().trim()) : true;
+      password !== "" ? (props.password = password) : true;
+      profile_pic !== "" ? (props.profile_pic = profile_pic) : true;
+
+      const user = await User.findOneAndUpdate(
+        { _id: userId },
+        { $set: props },
+        { returnOriginal: false }
+      );
+
+      return user;
     },
 
     //PASSWORD RECOVERY
@@ -144,7 +170,6 @@ const resolvers = {
 
       const emailToken = jwt.sign(payload, passSecret, { expiresIn: "15m" });
       const link = `http://localhost:3000/password-reset/${user.id}/${emailToken}`;
-      console.log(link);
 
       //add token to user object
       const addToken = await User.findOneAndUpdate(
@@ -174,9 +199,6 @@ const resolvers = {
       } catch (error) {
         console.log(error);
       }
-
-      // const dbToken = user.token + user.id;
-      //if (dbToken !== token) throw new Error("Invalid/expired token");
     },
 
     //DELETE USER

@@ -96,7 +96,7 @@ const typeDefs = gql`
       userId: ID!
       username: String!
       email: String!
-      password: String
+      password: String!
       profile_pic: String!
     ): User
 

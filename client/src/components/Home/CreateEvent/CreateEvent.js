@@ -13,9 +13,9 @@ import {
 
 import { gql, useMutation } from "@apollo/client";
 
-const CreateEvent = () => {
+const CreateEvent = ({ user, lazyEvents }) => {
   const [eventLog, setEventLog] = useState({
-    evOrganizer: "61f27e57bc5b29fa650b2667",
+    evOrganizer: user,
     evName: "",
     evType: "Boardgames",
     evOnline: "false",
@@ -73,6 +73,7 @@ const CreateEvent = () => {
                 //   ev_description: eventLog.evDescription,
               },
             });
+            lazyEvents();
           } catch (err) {
             console.log(err);
           }

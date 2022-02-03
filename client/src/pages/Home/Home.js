@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import { lazy, React, useEffect, useState } from "react";
 import CreateEvent from "../../components/Home/CreateEvent/CreateEvent";
 import { Calendar } from "../../components/Home/Calendar/Calendar";
 import MyEvents from "../../components/Home/MyEvents/MyEvents";
@@ -7,7 +7,7 @@ import Dashboard from "../../components/Home/Dashboard/Dashboard";
 import { HomeContainer, LeftCol, RightCol } from "./Home.style";
 import { useQuery, gql, useMutation, useLazyQuery } from "@apollo/client";
 
-function Home() {
+function Home({ geek, setGeek }) {
   const GET_EVENTS = gql`
     query GetEvents {
       getEvents {
@@ -28,7 +28,7 @@ function Home() {
     }
   `;
 
-  const hermes = "61f27e57bc5b29fa650b2667"; //to take this from token.id
+  const user = geek.id;
 
   const [eventCards, setEventCards] = useState([]);
   const [lazyEvents, { loading, data, error }] = useLazyQuery(GET_EVENTS);
@@ -50,17 +50,17 @@ function Home() {
         <LeftCol>
           <MyEvents
             eventCards={eventCards}
-            user={hermes}
+            user={user}
             loading={loading}
             data={data}
           />
-          <CreateEvent />
+          <CreateEvent user={user} lazyEvents={lazyEvents} />
         </LeftCol>
         <RightCol>
           <Filters />
           <Dashboard
             eventCards={eventCards}
-            user={hermes}
+            user={user}
             loading={loading}
             data={data}
             trigger={trigger}

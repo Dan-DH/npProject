@@ -54,7 +54,7 @@ import { useQuery, gql, useMutation } from "@apollo/client";
 //       setAuth("Login needed");
 //     }
 //   };
-const LogIn = () => {
+const LogIn = ({ geek, setGeek }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [userLog, setUserLog] = useState({
     login: "",
@@ -69,17 +69,17 @@ const LogIn = () => {
       login(username: $username, password: $password) {
         id
         token
+        email
+        username
+        profile_pic
       }
     }
   `;
 
   const [logUser] = useMutation(LOGIN);
 
-  //TODO: refactor this
   const handleInputs = (e) => {
-    var name = e.target.name;
-    var value = e.target.value;
-    setUserLog({ ...userLog, [name]: value });
+    setUserLog({ ...userLog, [e.target.name]: e.target.value });
   };
 
   return (
@@ -98,8 +98,19 @@ const LogIn = () => {
                       username: userLog.login,
                       password: userLog.password,
                     },
+                    onCompleted: ({ login }) => {
+                      localStorage.setItem("auth_token", login.token);
+                      console.log(login);
+                      setGeek({
+                        id: login.id,
+                        email: login.email,
+                        profilePic: login.profile_pic,
+                        username: login.username,
+                      });
+                      // console.log("login", geek);
+                      navigate("../home");
+                    },
                   });
-                  navigate("../home");
                 } else {
                   setErrorMessage("Username / password cannot be empty");
                 }

@@ -15,23 +15,65 @@ import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 
 function App() {
-  return (
-    <div className="page-container">
-      <Navbar />
-      <Routes>
-        <Route exact path="/" element={<Main />} />
-        <Route exact path="/login" element={<LogIn />} />
-        <Route exact path="/signup" element={<SignUp />} />
-        <Route exact path="/home" element={<Home />} />
-        <Route exact path="/profile/me" element={<Profile />} />
-        <Route path="/profile/*" element={<Profile />} />
-        <Route exact path="/settings" element={<Settings />} />
-        <Route exact path="/password-recovery" element={<PassRecovery />} />
-        <Route path="/password-reset/*" element={<PassReset />} />
-      </Routes>
-      <Footer />
-    </div>
-  );
+  const [geek, setGeek] = useState({});
+  document.title = "GeekOut!";
+  // console.log("app", geek);
+
+  if (geek.id) {
+    return (
+      <div className="page-container">
+        <Navbar geek={geek} setGeek={setGeek} />
+        <Routes>
+          <Route exact path="/" element={<Main />} />
+          <Route
+            exact
+            path="/login"
+            element={<LogIn geek={geek} setGeek={setGeek} />}
+          />
+          <Route exact path="/signup" element={<SignUp />} />
+          <Route
+            exact
+            path="/home"
+            element={<Home geek={geek} setGeek={setGeek} />}
+          />
+          <Route
+            exact
+            path="/profile/me"
+            element={<Profile geek={geek} setGeek={setGeek} />}
+          />
+          {/* <Route path="/profile/*" element={<Profile />} />
+          <Route
+            exact
+            path="/settings"
+            element={<Settings geek={geek} setGeek={setGeek} />}
+          /> */}
+          <Route exact path="/password-recovery" element={<PassRecovery />} />
+          <Route path="/password-reset/*" element={<PassReset />} />
+          {/* <Route path="/*" element={<P404 />} /> */}
+        </Routes>
+        <Footer />
+      </div>
+    );
+  } else {
+    return (
+      <div className="page-container">
+        <Navbar geek={geek} setGeek={setGeek} />
+        <Routes>
+          <Route exact path="/" element={<Main />} />
+          <Route
+            exact
+            path="/login"
+            element={<LogIn geek={geek} setGeek={setGeek} />}
+          />
+          <Route exact path="/signup" element={<SignUp />} />
+          <Route exact path="/password-recovery" element={<PassRecovery />} />
+          <Route path="/password-reset/*" element={<PassReset />} />
+          <Route path="/*" element={<LogIn />} />
+        </Routes>
+        <Footer />
+      </div>
+    );
+  }
 }
 
 export default App;

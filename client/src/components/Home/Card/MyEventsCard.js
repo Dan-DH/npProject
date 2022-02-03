@@ -48,10 +48,6 @@ function Card({ event, user }) {
 
   const attending = isAttending ? "green" : "grey";
 
-  // useEffect(()=> {
-
-  // })
-
   const ATTEND = gql`
     mutation Attend($userId: ID!, $eventId: ID!) {
       attend(userId: $userId, eventId: $eventId)
