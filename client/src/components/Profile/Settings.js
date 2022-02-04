@@ -59,10 +59,11 @@ function Settings({ geek }) {
         onSubmit={async (e) => {
           try {
             e.preventDefault();
+            console.log(userSettings);
             await updateInfo({
               variables: userSettings,
             });
-            //   lazyGetUser(); //render page with user info with GetUser lazy query
+            //TODO:   lazyGetUser(); //render page with user info with GetUser lazy query
           } catch (err) {
             console.log(err);
           }
@@ -70,20 +71,30 @@ function Settings({ geek }) {
       >
         <Label>
           <p>Change username</p>
-          <Input type="text" name="username" onChange={handleInputs} />
+          <Input
+            type="text"
+            name="username"
+            onChange={handleInputs}
+            placeholder="..."
+          />
         </Label>
 
         <Label>
           <p>Change email</p>
-          <Input type="text" name="email" onChange={handleInputs} />
+          <Input
+            type="text"
+            name="email"
+            onChange={handleInputs}
+            placeholder="..."
+          />
         </Label>
         <Label>
           <p>Change profile picture</p>
           <Input
             type="text"
-            name="email"
+            name="profilePic"
             onChange={handleInputs}
-            placeholder="Paste direct link to picture..."
+            placeholder="Paste direct link to picture"
           />
         </Label>
         <Label>
@@ -97,9 +108,14 @@ function Settings({ geek }) {
         </Label>
         <Label>
           <p>Confirm new password</p>
-          <Input type="text" name="cpassword" onChange={handleInputs} />
+          <Input
+            type="text"
+            name="cpassword"
+            onChange={handleInputs}
+            placeholder="..."
+          />
         </Label>
-        <Submit>Create</Submit>
+        <Submit>Update</Submit>
       </FormForm>
     </FormContainer>
   );

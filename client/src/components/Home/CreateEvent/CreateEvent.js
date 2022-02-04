@@ -81,7 +81,13 @@ const CreateEvent = ({ user, lazyEvents }) => {
       >
         <Label>
           <p>Event name</p>
-          <Input type="text" name="evName" onChange={handleInputs} />
+          <Input
+            type="text"
+            name="evName"
+            onChange={handleInputs}
+            placeholder="..."
+            required
+          />
         </Label>
         <Label>
           <p>Event type</p>
@@ -113,15 +119,33 @@ const CreateEvent = ({ user, lazyEvents }) => {
         </Label>
         <Label>
           <p>Location</p>
-          <Input type="text" name="evLocation" onChange={handleInputs} />
+          <Input
+            type="text"
+            name="evLocation"
+            onChange={handleInputs}
+            placeholder="..."
+            required
+          />
         </Label>
         <Label>
           <p>Start time</p>
-          <Input type="text" name="evStart" onChange={handleInputs} />
+          <Input
+            type="text"
+            name="evStart"
+            onChange={handleInputs}
+            placeholder="..."
+            required
+          />
         </Label>
         <Label>
           <p>End time</p>
-          <Input type="text" name="evEnd" onChange={handleInputs} />
+          <Input
+            type="text"
+            name="evEnd"
+            onChange={handleInputs}
+            placeholder="..."
+            required
+          />
         </Label>
         <Label>
           <p>Max participants</p>
@@ -129,11 +153,16 @@ const CreateEvent = ({ user, lazyEvents }) => {
             type="number"
             name="evMaxParticipants"
             onChange={handleInputs}
+            required
           />
         </Label>
         <Label>
           <p>Event description</p>
-          <TextArea name="evDescription" onChange={handleInputs} />
+          <TextArea
+            name="evDescription"
+            onChange={handleInputs}
+            placeholder="..."
+          />
         </Label>
         <Submit>Create</Submit>
       </FormForm>

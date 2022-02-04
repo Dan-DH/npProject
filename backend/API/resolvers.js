@@ -145,13 +145,15 @@ const resolvers = {
       email !== "" ? (props.email = email.toLowerCase().trim()) : true;
       password !== "" ? (props.password = password) : true;
       profile_pic !== "" ? (props.profile_pic = profile_pic) : true;
+      console.log(userId);
+      console.log(props);
 
       const user = await User.findOneAndUpdate(
         { _id: userId },
         { $set: props },
         { returnOriginal: false }
       );
-
+      console.log(user);
       return user;
     },
 

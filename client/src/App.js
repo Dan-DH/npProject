@@ -16,6 +16,7 @@ import Footer from "./components/Footer/Footer";
 
 function App() {
   const [geek, setGeek] = useState({});
+  const [eventCards, setEventCards] = useState([]);
   document.title = "GeekOut!";
   // console.log("app", geek);
 
@@ -34,12 +35,26 @@ function App() {
           <Route
             exact
             path="/home"
-            element={<Home geek={geek} setGeek={setGeek} />}
+            element={
+              <Home
+                geek={geek}
+                setGeek={setGeek}
+                eventCards={eventCards}
+                setEventCards={setEventCards}
+              />
+            }
           />
           <Route
             exact
             path="/profile/me"
-            element={<Profile geek={geek} setGeek={setGeek} />}
+            element={
+              <Profile
+                geek={geek}
+                setGeek={setGeek}
+                eventCards={eventCards}
+                setEventCards={setEventCards}
+              />
+            }
           />
           {/* <Route path="/profile/*" element={<Profile />} />
           <Route

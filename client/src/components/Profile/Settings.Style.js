@@ -2,36 +2,36 @@ import styled from "styled-components";
 import { DeviceMin } from "../Breakpoints";
 
 export const FormContainer = styled.div`
-  max-width: 50%;
   display: flex;
   flex-direction: column;
-  margin-top: 2vh;
+  margin: 5vh auto;
 `;
 
 export const FormTitle = styled.h1`
   color: white;
   text-align: center;
   background-color: #b32201;
-  width: 80%;
+  width: 50%;
   margin: 0 auto;
 `;
 
 export const FormForm = styled.form`
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
+  margin: 2vh auto;
   font-size: 1.3rem;
+  width: 100%;
 `;
 
 export const Label = styled.label`
   color: white;
-  margin: 0.5vh;
-  width: 40vh;
+  margin: 0.5vh auto;
+  width: 50%;
   background-color: #b32201;
 `;
 
 export const Submit = styled.button`
-  margin-top: 1vh;
+  margin: 1vh auto 0 auto;
   width: 20vh;
   height: 5vh;
   font-size: 1.3rem;
@@ -39,27 +39,38 @@ export const Submit = styled.button`
   color: white;
   border: none;
   border-radius: 5px;
+  cursor: pointer;
 `;
 
 export const FormSelect = styled.select`
-  margin-top: 1vh;
-  width: 100%;
-  height: 5vh;
-  font-size: 1.2rem;
+  // margin-top: 1vh;
+  // width: 99.8%;
+  // height: 5vh;
+  // font-size: 1.2rem;
+  // background-color: #353944;
+  // border: 1px solid white;
+  // color: white;
 `;
 
 export const FormOption = styled.option``;
 
 export const Input = styled.input`
   height: 3vh;
-  width: 99%;
+  width: 98.5%;
   margin-top: 1vh;
   font-size: 1rem;
+  background-color: #353944;
+  border: 1px solid white;
+  color: white;
+  padding-left: 5px;
 `;
 
 export const TextArea = styled.textarea`
-  height: 7vh;
-  width: 99%;
-  margin-top: 1vh;
-  font-size: 1rem;
+  // height: 7vh;
+  // width: 99%;
+  // margin-top: 1vh;
+  // font-size: 1rem;
+  // background-color: #353944;
+  // border: 1px solid white;
+  // color: white;
 `;

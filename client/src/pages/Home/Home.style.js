@@ -2,7 +2,7 @@ import { NavLink as Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const HomeContainer = styled.div`
-  //   background-color: grey;
+  background-color: #032b43;
   width: 100%;
   height: 80vh;
   display: flex;

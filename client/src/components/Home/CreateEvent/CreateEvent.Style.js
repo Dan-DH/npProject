@@ -4,6 +4,7 @@ import { DeviceMin } from "../../Breakpoints";
 export const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
   margin-top: 2vh;
 `;
 
@@ -18,19 +19,20 @@ export const FormTitle = styled.h1`
 export const FormForm = styled.form`
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
+  margin: 2vh auto;
   font-size: 1.3rem;
+  width: 80%;
+  // background-color: red;
 `;
 
 export const Label = styled.label`
   color: white;
   margin: 0.5vh;
-  width: 40vh;
   background-color: #b32201;
 `;
 
 export const Submit = styled.button`
-  margin-top: 1vh;
+  margin: 1vh auto 0 auto;
   width: 20vh;
   height: 5vh;
   font-size: 1.3rem;
@@ -38,27 +40,39 @@ export const Submit = styled.button`
   color: white;
   border: none;
   border-radius: 5px;
+  cursor: pointer;
 `;
 
 export const FormSelect = styled.select`
   margin-top: 1vh;
-  width: 100%;
+  padding-left: 2px;
+  width: 99.8%;
   height: 5vh;
   font-size: 1.2rem;
+  background-color: #353944;
+  border: 1px solid white;
+  color: white;
 `;
 
 export const FormOption = styled.option``;
 
 export const Input = styled.input`
   height: 3vh;
-  width: 99%;
+  width: 98.6%;
   margin-top: 1vh;
+  padding-left: 5px;
   font-size: 1rem;
+  background-color: #353944;
+  border: 1px solid white;
+  color: white;
 `;
 
 export const TextArea = styled.textarea`
   height: 7vh;
-  width: 99%;
+  width: 99.5%;
   margin-top: 1vh;
   font-size: 1rem;
+  background-color: #353944;
+  border: 1px solid white;
+  color: white;
 `;

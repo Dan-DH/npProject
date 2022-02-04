@@ -16,7 +16,7 @@ export const CardContainer = styled.div`
 `;
 
 export const CardImage = styled.div`
-  background-color: #b32201;
+  background-color: #087ca7;
   width: 15%;
   text-align: center;
 `;

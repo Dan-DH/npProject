@@ -7,7 +7,7 @@ import Dashboard from "../../components/Home/Dashboard/Dashboard";
 import { HomeContainer, LeftCol, RightCol } from "./Home.style";
 import { useQuery, gql, useMutation, useLazyQuery } from "@apollo/client";
 
-function Home({ geek, setGeek }) {
+function Home({ geek, setGeek, eventCards, setEventCards }) {
   const GET_EVENTS = gql`
     query GetEvents {
       getEvents {
@@ -29,8 +29,6 @@ function Home({ geek, setGeek }) {
   `;
 
   const user = geek.id;
-
-  const [eventCards, setEventCards] = useState([]);
   const [lazyEvents, { loading, data, error }] = useLazyQuery(GET_EVENTS);
   const [trigger, setTrigger] = useState(false);
 

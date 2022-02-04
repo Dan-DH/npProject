@@ -4,18 +4,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const CardContainerList = styled.li`
   list-style: none;
+  // background-color: grey;
+  width: 100%;
 `;
 
 export const CardContainer = styled.div`
-  margin: 2vh auto 2vh auto;
+  margin: 2vh auto;
   display: flex;
   flex-direction: row;
+  justify-content: center;
   width: 90%;
   height: 10vh;
 `;
 
 export const CardImage = styled.div`
-  background-color: #b32201;
+  background-color: #087ca7;
   width: 15%;
   text-align: center;
 `;

@@ -72,6 +72,7 @@ const LogIn = ({ geek, setGeek }) => {
         email
         username
         profile_pic
+        bio
       }
     }
   `;
@@ -106,6 +107,7 @@ const LogIn = ({ geek, setGeek }) => {
                         email: login.email,
                         profilePic: login.profile_pic,
                         username: login.username,
+                        bio: login.bio,
                       });
                       // console.log("login", geek);
                       navigate("../home");

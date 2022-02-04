@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { DeviceMin } from "../../Breakpoints";
 
 export const MyEventsContainer = styled.div`
-  //   background-color: white;
   width: 100%;
   margin-top: 5vh;
 `;
@@ -13,6 +12,6 @@ export const MyEventsTitle = styled.h1`
   color: white;
   text-align: center;
   background-color: #b32201;
-  width: 90%;
+  width: 80%;
   margin: 0 auto;
 `;
