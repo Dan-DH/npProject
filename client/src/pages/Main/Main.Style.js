@@ -1,57 +1,73 @@
 import styled from "styled-components";
 import { DeviceMin } from "../../components/Breakpoints";
 
-export const MainContainer = styled.div``;
-
-export const SecondMainContainer = styled.div`
-  margin-top: 5vh;
+export const MainContainer = styled.div`
   color: white;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const MainSynopsis = styled.div`
   display: flex;
   flex-direction: row;
 `;
 
-export const MainTitle = styled.h1`
-  margin-top: 5vh;
-  font-size: 4rem;
-  text-align: center;
-  color: #b32201;
-  background-color: white;
-`;
-export const MainSynopsis = styled.div`
+export const SynopsisImage = styled.img`
   width: 50%;
-  padding: 2vh;
 `;
-export const SynopsisParagrahp = styled.p`
-  font-size: 2rem;
-  margin: 1vh auto;
-  width: 50%;
+
+export const SynopsisDiv = styled.div`
   background-color: #b32201;
-  padding: 2vh;
-  border-radius: 15px 50px 30px 5px;
-`;
-export const MainInstructions = styled.div`
+  font-size: 1.5rem;
   width: 50%;
-  background-color: grey;
-  margin-right: 5vh;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+export const SynopsisParagrahp = styled.p``;
+
+export const MainInstructions = styled.div`
+  width: 100%;
   border-radius: 5px 30px 50px 15px;
-  padding: 2vh;
+  display: flex;
+  flex-direction: row;
+`;
+
+export const InstructionsTitleDiv = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  color: white;
+  background-color: black;
 `;
 
 export const InstructionsTitle = styled.h2`
   font-size: 2.5rem;
   text-align: center;
+  margin: 5vh 0;
+`;
+
+export const StepDiv = styled.div`
+  width: 50%;
+  background-color: #b32201;
+  display: flex;
+  flex-direction: column;
+  padding-top: 1vh;
 `;
 
 export const Step = styled.div`
   display: flex;
   flex-direction: row;
-  margin-top: 2vh;
+  padding: 2vh;
 `;
 
 export const StepText = styled.p`
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin: auto 2vh;
 `;
+
 export const StepNumber = styled.p`
   font-size: 4rem;
   background-color: #b32201;
@@ -59,4 +75,10 @@ export const StepNumber = styled.p`
   height: 5rem;
   border-radius: 50%;
   text-align: center;
+  border: 2px solid white;
+  margin-left: 3rem;
+`;
+
+export const InstructionsImage = styled.img`
+  width: 50%;
 `;

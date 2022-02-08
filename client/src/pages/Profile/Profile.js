@@ -12,12 +12,15 @@ import {
   Submit,
   OrgEventsContainer,
   SettingsContainer,
+  UserBioColumn,
+  SettingsColumn,
 } from "./Profile.Style";
 
 import Settings from "../../components/Profile/Settings";
 import MyEvents from "../../components/Home/MyEvents/MyEvents";
 
 function Profile({ geek, eventCards, setEventCards }) {
+  //populating organized events
   const GET_EVENTS = gql`
     query GetEvents {
       getEvents {
@@ -39,26 +42,61 @@ function Profile({ geek, eventCards, setEventCards }) {
   `;
   console.log(window.location.href);
   const { loading, data, error } = useQuery(GET_EVENTS);
-  console.log(geek);
+
+  //posting bio
+  const [userBio, setUserBio] = useState({
+    userId: geek.id,
+    bio: "",
+  });
+  const CHANGE_BIO_USER = gql`
+    mutation ChangeBioUser($userId: ID!, $bio: String!) {
+      changeBioUser(userId: $userId, bio: $bio) {
+        id
+        bio
+      }
+    }
+  `;
+  const [updateBio] = useMutation(CHANGE_BIO_USER);
+  const handleChange = (e) => {
+    setUserBio({ ...userBio, [e.target.name]: e.target.value });
+  };
   return (
     <HeaderContainer>
       <Row>
-        <UserImageContainer>
-          <UserImage src={geek.profilePic} alt="profile picture" />
-        </UserImageContainer>
-        <UserBioContainer>
-          <UserBio>{geek.bio}</UserBio>
-          <form>
-            <UserBioInput placeholder="Tell the guys something about yourself :)" />
-            <br />
-            <Submit>Post</Submit>
-          </form>
-        </UserBioContainer>
-      </Row>
-      <Row>
-        <SettingsContainer>
-          <Settings geek={geek} />
-        </SettingsContainer>
+        <UserBioColumn>
+          <UserImageContainer>
+            <UserImage src={geek.profilePic} alt="profile picture" />
+          </UserImageContainer>
+          <UserBioContainer>
+            <UserBio>{geek.bio}</UserBio>
+            <form
+              onSubmit={async (e) => {
+                try {
+                  e.preventDefault();
+                  console.log(userBio);
+                  await updateBio({
+                    variables: userBio,
+                  });
+                  //TODO:   lazyGetUser(); //render page with user info with GetUser lazy query
+                } catch (err) {
+                  console.log(err);
+                }
+              }}
+            >
+              <UserBioInput
+                placeholder="Tell the guys something about yourself :)"
+                onChange={handleChange}
+                name="bio"
+                required
+              />
+              <br />
+              <Submit>Post</Submit>
+            </form>
+          </UserBioContainer>
+          <SettingsContainer>
+            <Settings geek={geek} />
+          </SettingsContainer>
+        </UserBioColumn>
         <OrgEventsContainer>
           <MyEvents
             eventCards={eventCards}

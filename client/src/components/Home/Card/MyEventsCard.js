@@ -9,6 +9,7 @@ import {
   faWifi,
   faMapMarkedAlt,
 } from "@fortawesome/free-solid-svg-icons";
+import ReactTooltip from "react-tooltip";
 
 import {
   CardContainer,
@@ -29,6 +30,7 @@ import {
   CardContainerList,
   UserIcon,
   UserIconContainer,
+  ReactTooltipStyled,
 } from "./MyEventsCard.style";
 import { useQuery, gql, useMutation } from "@apollo/client";
 
@@ -38,6 +40,13 @@ function Card({ event, user }) {
     Hangout: faBeer,
     Roleplaying: faDiceD20,
     Videogames: faGamepad,
+  };
+
+  const iconColor = {
+    Boardgames: "#2a9d8f",
+    Hangout: "#ffba08",
+    Roleplaying: "#b32201",
+    Videogames: "#087ca7",
   };
 
   const onLine = event.ev_online ? faWifi : faMapMarkedAlt;
@@ -57,10 +66,13 @@ function Card({ event, user }) {
   const [userAttend] = useMutation(ATTEND);
 
   return (
-    <CardContainerList>
+    <CardContainerList data-tip data-for={event.id}>
       <CardContainer>
-        <CardImage>
-          {" "}
+        <CardImage
+          style={{
+            backgroundColor: iconColor[event.ev_type],
+          }}
+        >
           <CardImageIcon icon={iconObject[event.ev_type]} />
         </CardImage>
         <InfoBox>
@@ -85,6 +97,11 @@ function Card({ event, user }) {
           </CardParticipants>
         </InfoBox>
       </CardContainer>
+      <ReactTooltipStyled id={event.id} place="bottom" type="dark">
+        {event.ev_description
+          ? event.ev_description
+          : "This event has no description"}
+      </ReactTooltipStyled>
     </CardContainerList>
   );
 }

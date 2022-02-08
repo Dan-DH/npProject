@@ -8,6 +8,7 @@ export const Nav = styled.nav`
   justify-content: space-between;
   align-items: center;
   z-index: 12;
+  border-bottom: 1px solid white;
 `;
 
 export const NavLogo = styled.img`

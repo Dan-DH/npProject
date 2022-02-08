@@ -10,7 +10,7 @@ const userSchema = new Schema({
   profile_pic: {
     type: String,
     default:
-      "https://cdn5.vectorstock.com/i/1000x1000/73/09/creative-cool-geek-face-logo-vector-22457309.jpg",
+      "https://cdn4.iconfinder.com/data/icons/user-avatar-flat-icons/512/User_Avatar-33-512.png",
   },
   bio: String,
   moderator: { type: Boolean, default: false },

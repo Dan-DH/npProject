@@ -7,20 +7,15 @@ import {
   Col2Login,
 } from "../../components/Forms/GridLogin.styled";
 import { StyledButton } from "../../components/Forms/Button.styled";
-// import {
-//   StyledLinkDiv,
-//   StyledLink,
-// } from "../../components/Forms/StyledLink.styled";
-// import { Label } from "../../components/Forms/Label.styled";
 import { useState } from "react";
 import { Input } from "../../components/Forms/Input.styled";
 import { gql, useMutation } from "@apollo/client";
 
 const PassRecovery = () => {
   const [errorMessage, setErrorMessage] = useState("");
+
   const [userEmail, setUserEmail] = useState({ email: "" });
 
-  //navigation to go to login page after sending the request
   let navigate = useNavigate();
 
   const PASS_RECOVERY = gql`
@@ -33,7 +28,6 @@ const PassRecovery = () => {
 
   const [passRecovery] = useMutation(PASS_RECOVERY);
 
-  //THERE MUST BE AN EASIER WAY OF  GETTING THE INFO FROM A FORM -but you are preventing defaults tho...
   const handleInputs = (e) => {
     setUserEmail({ ...userEmail, [e.target.name]: e.target.value });
   };

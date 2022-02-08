@@ -2,8 +2,6 @@ import React from "react";
 
 import {
   MainContainer,
-  SecondMainContainer,
-  MainTitle,
   MainSynopsis,
   SynopsisParagrahp,
   MainInstructions,
@@ -11,26 +9,36 @@ import {
   Step,
   StepText,
   StepNumber,
+  StepDiv,
+  InstructionsTitleDiv,
+  SynopsisImage,
+  SynopsisDiv,
+  InstructionsImage,
 } from "./Main.Style";
+
+import tavernBanner from "../../assets/images/tavernBanner.jpg";
+
+import valorantBanner from "../../assets/images/valorantBanner.jpg";
 
 function Main() {
   return (
     <MainContainer>
-      <MainTitle>What's GeekOut?</MainTitle>
-      <SecondMainContainer>
-        <MainSynopsis>
+      <MainSynopsis>
+        <SynopsisImage src={tavernBanner} />
+        <SynopsisDiv>
           <SynopsisParagrahp>
-            Having trouble finding players for a D&D campaing or want to play
-            some old-school GoldenEye 007 deathmatch?
+            Having trouble finding players for your gaming sessions?
+            <br />
+            <br />
+            GeekOut is a event-driven community for all gamers
           </SynopsisParagrahp>
-          <SynopsisParagrahp>
-            GeekOut is a event-driven community for social gamers of any kind.
-          </SynopsisParagrahp>
-        </MainSynopsis>
-        <MainInstructions>
-          <InstructionsTitle>
-            How to have fun in 4 easy steps:
-          </InstructionsTitle>
+        </SynopsisDiv>
+      </MainSynopsis>
+      <InstructionsTitleDiv>
+        <InstructionsTitle>How to have fun in 4 easy steps:</InstructionsTitle>
+      </InstructionsTitleDiv>
+      <MainInstructions>
+        <StepDiv>
           <Step>
             <StepNumber>1</StepNumber>
             <StepText>Create an account using your email</StepText>
@@ -38,19 +46,20 @@ function Main() {
           <Step>
             <StepNumber>2</StepNumber>
             <StepText>
-              Create an event. Set a date, location and number of players.
+              Create an event. Set a location, date and number of players
             </StepText>
           </Step>
           <Step>
             <StepNumber>3</StepNumber>
-            <StepText>Rejoice as other users sign up for your event.</StepText>
+            <StepText>Rejoice as other players sign up for your event</StepText>
           </Step>
           <Step>
             <StepNumber>4</StepNumber>
             <StepText>Go and have a good time!</StepText>
           </Step>
-        </MainInstructions>
-      </SecondMainContainer>
+        </StepDiv>
+        <InstructionsImage src={valorantBanner} />
+      </MainInstructions>
     </MainContainer>
   );
 }

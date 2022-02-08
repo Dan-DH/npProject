@@ -6,6 +6,7 @@ import {
   Label,
   Input,
   Submit,
+  Parag,
 } from "./Settings.Style";
 
 import { gql, useMutation } from "@apollo/client";
@@ -59,7 +60,6 @@ function Settings({ geek }) {
         onSubmit={async (e) => {
           try {
             e.preventDefault();
-            console.log(userSettings);
             await updateInfo({
               variables: userSettings,
             });
@@ -70,7 +70,7 @@ function Settings({ geek }) {
         }}
       >
         <Label>
-          <p>Change username</p>
+          <Parag>Change username</Parag>
           <Input
             type="text"
             name="username"
@@ -80,7 +80,7 @@ function Settings({ geek }) {
         </Label>
 
         <Label>
-          <p>Change email</p>
+          <Parag>Change email</Parag>
           <Input
             type="text"
             name="email"
@@ -89,7 +89,7 @@ function Settings({ geek }) {
           />
         </Label>
         <Label>
-          <p>Change profile picture</p>
+          <Parag>Change profile picture</Parag>
           <Input
             type="text"
             name="profilePic"
@@ -98,7 +98,7 @@ function Settings({ geek }) {
           />
         </Label>
         <Label>
-          <p>Change password</p>
+          <Parag>Change password</Parag>
           <Input
             type="text"
             name="password"
@@ -107,7 +107,7 @@ function Settings({ geek }) {
           />
         </Label>
         <Label>
-          <p>Confirm new password</p>
+          <Parag>Confirm new password</Parag>
           <Input
             type="text"
             name="cpassword"

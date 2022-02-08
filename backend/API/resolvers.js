@@ -107,7 +107,9 @@ const resolvers = {
 
     //USER LOGIN
     async login(_, { username, password }, { req, res }) {
-      const user = await User.findOne({ username });
+      const user = await User.findOne({
+        username: username.toLowerCase().trim(),
+      });
 
       if (!user) {
         throw new UserInputError("Incorrect username or password");
@@ -151,6 +153,19 @@ const resolvers = {
       const user = await User.findOneAndUpdate(
         { _id: userId },
         { $set: props },
+        { returnOriginal: false }
+      );
+      console.log(user);
+      return user;
+    },
+
+    //USER BIO UPDATE
+    async changeBioUser(_, { userId, bio }) {
+      if (bio === "") throw new Error("Empty bio");
+
+      const user = await User.findOneAndUpdate(
+        { _id: userId },
+        { $set: { bio } },
         { returnOriginal: false }
       );
       console.log(user);

@@ -11,7 +11,7 @@ export const FormTitle = styled.h1`
   color: white;
   text-align: center;
   background-color: #b32201;
-  width: 50%;
+  width: 70%;
   margin: 0 auto;
 `;
 
@@ -26,8 +26,13 @@ export const FormForm = styled.form`
 export const Label = styled.label`
   color: white;
   margin: 0.5vh auto;
-  width: 50%;
+  width: 70%;
   background-color: #b32201;
+  text-align: left;
+`;
+
+export const Parag = styled.p`
+  padding-left: 5px;
 `;
 
 export const Submit = styled.button`

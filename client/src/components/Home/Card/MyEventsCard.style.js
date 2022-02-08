@@ -1,6 +1,11 @@
 import styled from "styled-components";
 import { DeviceMin } from "../../Breakpoints";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ReactTooltip from "react-tooltip";
+
+export const ReactTooltipStyled = styled(ReactTooltip)`
+  max-width: 150px;
+`;
 
 export const CardContainerList = styled.li`
   list-style: none;

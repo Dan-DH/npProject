@@ -69,11 +69,8 @@ const typeDefs = gql`
 
     login(username: String!, password: String!): User
 
-    #TODO: set recovery logic
-    #TODO: send email
     passRecovery(email: String!): User
 
-    #TODO: set email and parameter/token logic
     passwordReset(id: ID!, token: String!, password: String!): String!
 
     #TODO: send emails to event participants
@@ -91,7 +88,6 @@ const typeDefs = gql`
     #String!
     unattend(userId: ID!, eventId: ID!): String!
 
-    #TODO: send emails to all participants
     changeInfoUser(
       userId: ID!
       username: String!
@@ -100,6 +96,9 @@ const typeDefs = gql`
       profile_pic: String!
     ): User
 
+    changeBioUser(userId: ID!, bio: String!): User
+
+    #TODO: send emails to all participants
     #TODO: add dates to this resolver
     #TODO: add logic for max participants (can't reduce max number below number of current participants)
     #TODO: add logic for date (can't set event in the past)

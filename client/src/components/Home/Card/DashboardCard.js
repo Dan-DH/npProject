@@ -9,6 +9,7 @@ import {
   faWifi,
   faMapMarkedAlt,
 } from "@fortawesome/free-solid-svg-icons";
+import ReactTooltip from "react-tooltip";
 
 import {
   CardContainer,
@@ -29,6 +30,7 @@ import {
   CardContainerList,
   UserIcon,
   UserIconContainer,
+  ReactTooltipStyled,
 } from "./DashboardCard.style";
 import { gql, useMutation } from "@apollo/client";
 
@@ -38,6 +40,13 @@ function Card({ event, user, trigger, setTrigger }) {
     Hangout: faBeer,
     Roleplaying: faDiceD20,
     Videogames: faGamepad,
+  };
+
+  const iconColor = {
+    Boardgames: "#2a9d8f",
+    Hangout: "#ffba08",
+    Roleplaying: "#b32201",
+    Videogames: "#087ca7",
   };
 
   const onLine = event.ev_online === "true" ? faWifi : faMapMarkedAlt;
@@ -57,10 +66,13 @@ function Card({ event, user, trigger, setTrigger }) {
   const [userAttend] = useMutation(ATTEND);
 
   return (
-    <CardContainerList>
+    <CardContainerList data-tip data-for={event.id}>
       <CardContainer>
-        <CardImage>
-          {" "}
+        <CardImage
+          style={{
+            backgroundColor: iconColor[event.ev_type],
+          }}
+        >
           <CardImageIcon icon={iconObject[event.ev_type]} />
         </CardImage>
         <InfoBox>
@@ -100,6 +112,17 @@ function Card({ event, user, trigger, setTrigger }) {
           <UserIcon icon={faUser} />
         </UserIconContainer>
       </CardContainer>
+      <ReactTooltipStyled id={event.id} place="bottom" type="dark">
+        {event.ev_description
+          ? event.ev_description
+          : "This event has no description"}
+        <br />
+        <img
+          src="https://ih0.redbubble.net/image.430476749.0382/flat,800x800,070,f.u4.jpg"
+          alt="profile"
+          style={{ width: "50px" }}
+        />
+      </ReactTooltipStyled>
     </CardContainerList>
   );
 }

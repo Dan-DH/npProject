@@ -116,7 +116,7 @@ const SignUp = () => {
               ></Input>
               <br />
               <p style={{ color: "#9B0000" }}> {errorMessage}</p>
-              <StyledButton>Sign Up</StyledButton>
+              <StyledButton>Submit</StyledButton>
             </form>
           </Col2Signup>
         </RowSignup>

@@ -6,15 +6,21 @@ export const HeaderContainer = styled.div`
 `;
 
 export const Row = styled.div`
-  margin-top: 5vh;
-  // background-color: pink;
   display: flex;
   flex-direction: row;
+  justify-content: center;
+`;
+
+export const UserBioColumn = styled.div`
+  width: 50%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const UserImageContainer = styled.div`
-  width: 50%;
   text-align: center;
+  margin-top: 10vh;
 `;
 
 export const UserImage = styled.img`
@@ -25,11 +31,10 @@ export const UserImage = styled.img`
 `;
 
 export const UserBioContainer = styled.div`
-  width: 50%;
-  margin-right: 5vh;
-  //background-color: green;
+  // background-color: green;
   text-align: center;
   padding: 1rem;
+  margin-bottom: 5vh;
 `;
 
 export const UserBio = styled.p`
@@ -60,12 +65,16 @@ export const Submit = styled.button`
   cursor: pointer;
 `;
 
+// export const SettingsColumn = styled.div`
+//   width: 100%;
+//   margin-top: 5vh;
+// `;
+
+export const SettingsContainer = styled.div`
+  width: 100%;
+`;
+
 export const OrgEventsContainer = styled.div`
   width: 50%;
   // background-color: green;
-`;
-
-export const SettingsContainer = styled.div`
-  width: 50%;
-  // background-color: yellow;
 `;

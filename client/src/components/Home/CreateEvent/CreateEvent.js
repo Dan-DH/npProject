@@ -31,6 +31,7 @@ const CreateEvent = ({ user, lazyEvents }) => {
       $evOnline: String!
       $evLocation: String!
       $evMaxParticipants: Int!
+      $evDescription: String!
     ) {
       createEvent(
         ev_organizer: $evOrganizer
@@ -39,6 +40,7 @@ const CreateEvent = ({ user, lazyEvents }) => {
         ev_online: $evOnline
         ev_location: $evLocation
         ev_max_participants: $evMaxParticipants
+        ev_description: $evDescription
       ) {
         id
       }
@@ -49,8 +51,6 @@ const CreateEvent = ({ user, lazyEvents }) => {
 
   const handleInputs = (e) => {
     setEventLog({ ...eventLog, [e.target.name]: e.target.value });
-    console.log(e.target.name);
-    console.log(e.target.value);
   };
 
   return (
@@ -61,7 +61,6 @@ const CreateEvent = ({ user, lazyEvents }) => {
         onSubmit={async (e) => {
           try {
             e.preventDefault();
-            console.log(eventLog);
             await logEvent({
               variables: {
                 evOrganizer: eventLog.evOrganizer,
@@ -70,7 +69,7 @@ const CreateEvent = ({ user, lazyEvents }) => {
                 evOnline: eventLog.evOnline,
                 evLocation: eventLog.evLocation,
                 evMaxParticipants: parseInt(eventLog.evMaxParticipants),
-                //   ev_description: eventLog.evDescription,
+                evDescription: eventLog.evDescription,
               },
             });
             lazyEvents();
