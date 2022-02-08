@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import img5 from "../../assets/images/mtgBanner.png";
+import img5 from "../../assets/images/mtgBanner.webp";
 
 import { DeviceMax, DeviceMin } from "../Breakpoints";
 export const GridSignup = styled.div``;

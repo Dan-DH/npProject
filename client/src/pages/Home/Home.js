@@ -1,11 +1,11 @@
-import { lazy, React, useEffect, useState } from "react";
+import { React, useEffect, useState } from "react";
 import CreateEvent from "../../components/Home/CreateEvent/CreateEvent";
-import { Calendar } from "../../components/Home/Calendar/Calendar";
+
 import MyEvents from "../../components/Home/MyEvents/MyEvents";
 import { Filters } from "../../components/Home/Filters/Filters";
 import Dashboard from "../../components/Home/Dashboard/Dashboard";
 import { HomeContainer, LeftCol, RightCol } from "./Home.style";
-import { useQuery, gql, useMutation, useLazyQuery } from "@apollo/client";
+import { gql, useLazyQuery } from "@apollo/client";
 
 function Home({ geek, setGeek, eventCards, setEventCards }) {
   const GET_EVENTS = gql`

@@ -16,9 +16,9 @@ import {
   InstructionsImage,
 } from "./Main.Style";
 
-import tavernBanner from "../../assets/images/tavernBanner.jpg";
+import tavernBanner from "../../assets/images/tavernBanner.webp";
 
-import valorantBanner from "../../assets/images/valorantBanner.jpg";
+import valorantBanner from "../../assets/images/valorantBanner.webp";
 
 function Main() {
   return (

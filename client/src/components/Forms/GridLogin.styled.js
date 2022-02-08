@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import img from "../../assets/images/scifiBanner.jpg";
-//import img from "../../assets/images/hackedBanner.jpg";
+import img from "../../assets/images/scifiBanner.webp";
 import { DeviceMax, DeviceMin } from "../Breakpoints";
 
 export const GridLogin = styled.div``;

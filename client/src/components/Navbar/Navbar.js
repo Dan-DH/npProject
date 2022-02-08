@@ -10,7 +10,7 @@ import {
   NavBtnLink,
 } from "./Navbar.style";
 
-import logoImg from "../../assets/images/gitBanner.png";
+import logoImg from "../../assets/images/gitBanner.webp";
 
 const Navbar = ({ geek, setGeek }) => {
   return (
