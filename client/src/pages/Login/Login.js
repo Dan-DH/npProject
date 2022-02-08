@@ -7,53 +7,12 @@ import {
   Col2Login,
 } from "../../components/Forms/GridLogin.styled";
 import { StyledButton } from "../../components/Forms/Button.styled";
-import {
-  StyledLinkDiv,
-  StyledLink,
-} from "../../components/Forms/StyledLink.styled";
+import { StyledLink } from "../../components/Forms/StyledLink.styled";
 import { Label } from "../../components/Forms/Label.styled";
 import { useState } from "react";
 import { Input } from "../../components/Forms/Input.styled";
-import { useQuery, gql, useMutation } from "@apollo/client";
-//const LogIn = ({ auth, setAuth, user, setUser, coolDan, setCoolDan }) => {
+import { gql, useMutation } from "@apollo/client";
 
-//   const [errorMessage, setErrorMessage] = useState("");
-//   let navigate = useNavigate();
-
-//   let name, value;
-//   const handleInputs = (e) => {
-//     name = e.target.name;
-//     value = e.target.value;
-//     setUser({ ...user, [name]: value });
-//   };
-//   const submitHandler = async (e) => {
-//     e.preventDefault();
-//     const { login, password } = user;
-//     const res = await fetch("/users/login", {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify({
-//         login,
-//         password,
-//       }),
-//     });
-
-//     const testDan = await fetch(`/users/login/${login}`)
-//       .then((r) => r.json())
-//       .then((r) => setCoolDan(r._id));
-
-//     if (res.ok) {
-//       console.log("Successfully logged in");
-//       setAuth("Authenticated");
-//       navigate("../");
-//     } else {
-//       setErrorMessage("User name or Password is wrong!");
-//       console.log("login or password is wrong");
-//       setAuth("Login needed");
-//     }
-//   };
 const LogIn = ({ geek, setGeek }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [userLog, setUserLog] = useState({
@@ -101,7 +60,6 @@ const LogIn = ({ geek, setGeek }) => {
                     },
                     onCompleted: ({ login }) => {
                       localStorage.setItem("auth_token", login.token);
-                      console.log(login);
                       setGeek({
                         id: login.id,
                         email: login.email,
@@ -109,7 +67,6 @@ const LogIn = ({ geek, setGeek }) => {
                         username: login.username,
                         bio: login.bio,
                       });
-                      // console.log("login", geek);
                       navigate("../home");
                     },
                   });

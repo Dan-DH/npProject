@@ -18,7 +18,6 @@ function App() {
   const [geek, setGeek] = useState({});
   const [eventCards, setEventCards] = useState([]);
   document.title = "GeekOut!";
-  // console.log("app", geek);
 
   if (geek.id) {
     return (
@@ -56,12 +55,6 @@ function App() {
               />
             }
           />
-          {/* <Route path="/profile/*" element={<Profile />} />
-          <Route
-            exact
-            path="/settings"
-            element={<Settings geek={geek} setGeek={setGeek} />}
-          /> */}
           <Route exact path="/password-recovery" element={<PassRecovery />} />
           <Route path="/password-reset/*" element={<PassReset />} />
           {/* <Route path="/*" element={<P404 />} /> */}
@@ -83,7 +76,7 @@ function App() {
           <Route exact path="/signup" element={<SignUp />} />
           <Route exact path="/password-recovery" element={<PassRecovery />} />
           <Route path="/password-reset/*" element={<PassReset />} />
-          <Route path="/*" element={<LogIn />} />
+          <Route path="/*" element={<Navigate replace to="/Login" />} />
         </Routes>
         <Footer />
       </div>

@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useState } from "react";
 import {
   faDiceD20,
   faGamepad,
@@ -9,7 +8,6 @@ import {
   faWifi,
   faMapMarkedAlt,
 } from "@fortawesome/free-solid-svg-icons";
-import ReactTooltip from "react-tooltip";
 
 import {
   CardContainer,
@@ -28,8 +26,6 @@ import {
   CardImageIcon,
   ParticipantsIcon,
   CardContainerList,
-  UserIcon,
-  UserIconContainer,
   ReactTooltipStyled,
 } from "./MyEventsCard.style";
 import { useQuery, gql, useMutation } from "@apollo/client";

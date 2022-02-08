@@ -9,7 +9,6 @@ export const ReactTooltipStyled = styled(ReactTooltip)`
 
 export const CardContainerList = styled.li`
   list-style: none;
-  // background-color: grey;
   width: 100%;
 `;
 

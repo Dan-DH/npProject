@@ -1,6 +1,8 @@
 import { React, useEffect, useState } from "react";
-import CreateEvent from "../../components/Home/CreateEvent/CreateEvent";
+import { isMobile } from "react-device-detect";
+import Collapsible from "react-collapsible";
 
+import CreateEvent from "../../components/Home/CreateEvent/CreateEvent";
 import MyEvents from "../../components/Home/MyEvents/MyEvents";
 import { Filters } from "../../components/Home/Filters/Filters";
 import Dashboard from "../../components/Home/Dashboard/Dashboard";
@@ -31,6 +33,7 @@ function Home({ geek, setGeek, eventCards, setEventCards }) {
   const user = geek.id;
   const [lazyEvents, { loading, data, error }] = useLazyQuery(GET_EVENTS);
   const [trigger, setTrigger] = useState(false);
+  console.log(isMobile);
 
   useEffect(() => {
     lazyEvents();

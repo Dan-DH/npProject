@@ -7,7 +7,6 @@ export const Input = styled.input`
   @media ${DeviceMin.xs} {
     border-radius: 0.3rem;
     margin: 0.5rem 0 1.3rem 0;
-    //stays the same for sm as well
     padding: 0.5rem 0.5rem 0.5rem 0.5rem;
     font-size: 14px;
   }

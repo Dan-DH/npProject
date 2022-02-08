@@ -26,10 +26,6 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  /* background-color: #4cddfe; */
-  /* background-image: url("./assets/images/bgShelf80b.png");
-  background-size: cover; */
-  /* background-repeat: repeat; */
 }
 
 .post-input::placeholder {
@@ -47,8 +43,6 @@ body {
   align-self: center;
   outline: 0;
   outline-style: none;
-  -moz-appearance: none;
-  -webkit-appearance: none;
   appearance: none;
   padding-left: 10px;
   letter-spacing: 0.1rem;

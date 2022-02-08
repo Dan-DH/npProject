@@ -21,7 +21,6 @@ export const CardContainer = styled.div`
 `;
 
 export const CardImage = styled.div`
-backgroundColor: {iconColor[event.ev_type]};
   width: 15%;
   text-align: center;
 `;

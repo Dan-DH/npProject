@@ -22,7 +22,6 @@ export const FormForm = styled.form`
   margin: 2vh auto;
   font-size: 1.3rem;
   width: 80%;
-  // background-color: red;
 `;
 
 export const Label = styled.label`

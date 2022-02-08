@@ -39,7 +39,7 @@ const Navbar = ({ geek, setGeek }) => {
             >
               Logout
             </NavBtnLink>
-          </NavBtn>{" "}
+          </NavBtn>
         </NavMenu>
       )}
     </Nav>

@@ -15,23 +15,19 @@ export const RowSignup = styled.div`
     background-repeat: no-repeat;
     background-size: cover;
     width: 92vw;
-    // height: 94vh;
     border-radius: 0.2rem;
     margin: 5vh auto 2vh auto;
   }
   @media ${DeviceMin.sm} {
-    // height: 90vh;
     width: 90vw;
     margin: 6vh auto 4vh auto;
     padding: 3px;
     border-radius: 1rem;
-    //border stays same for all screens
     border: 1px solid #f3f0d7;
   }
   @media ${DeviceMin.md} {
     width: 80vw;
     margin: 10vh auto 6vh auto;
-    //same for below
     padding: 5px;
     border-radius: 1rem;
   }
@@ -40,7 +36,6 @@ export const RowSignup = styled.div`
     margin: 6vh auto 3vh auto;
   }
   @media ${DeviceMin.xl} {
-    // height: 90vh;
     width: 65vw;
     margin-top: 4vh;
   }
@@ -82,7 +77,6 @@ export const Col2Signup = styled.div`
       font-size: 23px;
       margin-bottom: 1rem;
     }
-    //same for all sizes
     font-weight: bold;
   }
   @media ${DeviceMin.md} {
@@ -115,8 +109,6 @@ export const Col1BoxSignup = styled.div`
   display: flex;
   flex-direction: column;
   background: rgba(0, 0, 0, 0.3);
-  //applying rgba color helps to have background have opacity
-  //but exclude text to recieve opacity
   margin: 0 8% 2% 8%;
   padding: 4% 3% 4% 3%;
   border-radius: 0.3rem;

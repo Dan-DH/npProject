@@ -40,7 +40,7 @@ function Profile({ geek, eventCards, setEventCards }) {
       }
     }
   `;
-  console.log(window.location.href);
+
   const { loading, data, error } = useQuery(GET_EVENTS);
 
   //posting bio

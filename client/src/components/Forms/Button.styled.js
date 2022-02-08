@@ -4,14 +4,12 @@ export const StyledButton = styled.button`
   border: 2px solid #b32201;
   background: #b32201;
   color: white;
-  // -ve spread value: -12px helps to keep shadow only in -x and -y axis
   cursor: pointer;
   @media ${DeviceMin.xs} {
     width: 87%;
     border-radius: 0.3rem;
     font-size: 14px;
     margin: 0 0 0.4rem 0;
-    //padding remains same
     padding: 0.5rem 0.5rem 0.5rem 0.5rem;
   }
   @media ${DeviceMin.sm} {

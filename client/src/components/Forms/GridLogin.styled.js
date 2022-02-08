@@ -15,24 +15,20 @@ export const RowLogin = styled.div`
     background-repeat: no-repeat;
     background-size: cover;
     width: 85vw;
-    // height: 90vh;
     border-radius: 0.2rem;
     margin: 10vh auto 4vh auto;
   }
   @media ${DeviceMin.sm} {
     width: 90vw;
-    //height declaration affects responsive layout. So, not using from sm screens
     margin: 6vh auto 4vh auto;
     padding: 3px;
     border-radius: 0.4rem;
-    //border stays same for all screens
     border: 1px solid #f3f0d7;
   }
 
   @media ${DeviceMin.md} {
     width: 80vw;
     margin: 20vh auto 6vh auto;
-    //same for below
     padding: 5px;
     border-radius: 1rem;
   }
@@ -41,19 +37,18 @@ export const RowLogin = styled.div`
     margin: 10vh auto 3vh auto;
   }
   @media ${DeviceMin.xl} {
-    // height: 75vh;
     margin: 10vh auto 6vh auto;
   }
   @media ${DeviceMin.xxl} {
     width: 50vw;
   }
 `;
+
 export const Col1Login = styled.div`
   @media ${DeviceMin.sm} {
     width: 40%;
     border-radius: 0.4rem;
     margin: 1%;
-    //not changed
     background-image: url(${img});
     background-repeat: no-repeat;
     background-size: cover;
@@ -64,6 +59,7 @@ export const Col1Login = styled.div`
     margin: 1.5%;
   }
 `;
+
 export const Col2Login = styled.div`
   @media ${DeviceMax.sm} {
     background-color: rgba(255, 255, 255, 0.35);
