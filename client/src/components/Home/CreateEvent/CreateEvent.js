@@ -20,6 +20,8 @@ const CreateEvent = ({ user, lazyEvents }) => {
     evType: "Boardgames",
     evOnline: "false",
     evLocation: "",
+    evStart: "",
+    evEnd: "",
     evMaxParticipants: 0,
   });
 
@@ -29,15 +31,19 @@ const CreateEvent = ({ user, lazyEvents }) => {
       $evName: String!
       $evType: String!
       $evOnline: String!
+      $evStartDate: Date!
+      $evEndDate: Date!
       $evLocation: String!
       $evMaxParticipants: Int!
-      $evDescription: String!
+      $evDescription: String
     ) {
       createEvent(
         ev_organizer: $evOrganizer
         ev_name: $evName
         ev_type: $evType
         ev_online: $evOnline
+        ev_start_date: $evStartDate
+        ev_end_date: $evEndDate
         ev_location: $evLocation
         ev_max_participants: $evMaxParticipants
         ev_description: $evDescription
@@ -61,6 +67,7 @@ const CreateEvent = ({ user, lazyEvents }) => {
         onSubmit={async (e) => {
           try {
             e.preventDefault();
+            console.log(eventLog);
             await logEvent({
               variables: {
                 evOrganizer: eventLog.evOrganizer,
@@ -70,8 +77,11 @@ const CreateEvent = ({ user, lazyEvents }) => {
                 evLocation: eventLog.evLocation,
                 evMaxParticipants: parseInt(eventLog.evMaxParticipants),
                 evDescription: eventLog.evDescription,
+                evStartDate: eventLog.evStart,
+                evEndDate: eventLog.evEnd,
               },
             });
+            e.target.reset();
             lazyEvents();
           } catch (err) {
             console.log(err);
@@ -129,7 +139,7 @@ const CreateEvent = ({ user, lazyEvents }) => {
         <Label>
           <p>Start time</p>
           <Input
-            type="text"
+            type="datetime-local"
             name="evStart"
             onChange={handleInputs}
             placeholder="..."
@@ -139,7 +149,7 @@ const CreateEvent = ({ user, lazyEvents }) => {
         <Label>
           <p>End time</p>
           <Input
-            type="text"
+            type="datetime-local"
             name="evEnd"
             onChange={handleInputs}
             placeholder="..."

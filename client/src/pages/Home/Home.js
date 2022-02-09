@@ -20,8 +20,8 @@ function Home({ geek, setGeek, eventCards, setEventCards }) {
         ev_language
         ev_online
         ev_creation_date
-        # ev_start_date
-        # ev_end_date
+        ev_start_date
+        ev_end_date
         ev_location
         ev_description
         ev_max_participants
@@ -33,7 +33,7 @@ function Home({ geek, setGeek, eventCards, setEventCards }) {
   const user = geek.id;
   const [lazyEvents, { loading, data, error }] = useLazyQuery(GET_EVENTS);
   const [trigger, setTrigger] = useState(false);
-  console.log(isMobile);
+  // console.log(isMobile);
 
   useEffect(() => {
     lazyEvents();

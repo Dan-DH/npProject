@@ -15,9 +15,15 @@ import logoImg from "../../assets/images/gitBanner.webp";
 const Navbar = ({ geek, setGeek }) => {
   return (
     <Nav>
-      <Link to="/home">
-        <NavLogo src={logoImg} />
-      </Link>
+      {!geek.id ? (
+        <Link to="/">
+          <NavLogo src={logoImg} />
+        </Link>
+      ) : (
+        <Link to="/home">
+          <NavLogo src={logoImg} />
+        </Link>
+      )}
 
       {!geek.id ? (
         <NavMenu>

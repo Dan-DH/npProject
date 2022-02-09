@@ -12,6 +12,7 @@ import {
 import { gql, useMutation } from "@apollo/client";
 
 function Settings({ geek }) {
+  const [errorMessage, setErrorMessage] = useState("");
   const [userSettings, setUserSettings] = useState({
     userId: geek.id,
     username: "",
@@ -20,8 +21,6 @@ function Settings({ geek }) {
     password: "",
     cpassword: "",
   });
-
-  //   console.log(userSettings);
 
   const CHANGE_INFO_USER = gql`
     mutation ChangeInfoUser(
@@ -64,8 +63,10 @@ function Settings({ geek }) {
               variables: userSettings,
             });
             //TODO:   lazyGetUser(); //render page with user info with GetUser lazy query
+            e.target.reset();
+            setErrorMessage("");
           } catch (err) {
-            console.log(err);
+            setErrorMessage(err.message);
           }
         }}
       >
@@ -74,7 +75,7 @@ function Settings({ geek }) {
           <Input
             type="text"
             name="username"
-            onChange={handleInputs}
+            onInput={handleInputs}
             placeholder="..."
           />
         </Label>
@@ -84,7 +85,7 @@ function Settings({ geek }) {
           <Input
             type="text"
             name="email"
-            onChange={handleInputs}
+            onInput={handleInputs}
             placeholder="..."
           />
         </Label>
@@ -93,7 +94,7 @@ function Settings({ geek }) {
           <Input
             type="text"
             name="profilePic"
-            onChange={handleInputs}
+            onInput={handleInputs}
             placeholder="Paste direct link to picture"
           />
         </Label>
@@ -102,7 +103,7 @@ function Settings({ geek }) {
           <Input
             type="text"
             name="password"
-            onChange={handleInputs}
+            onInput={handleInputs}
             placeholder="Min 6 characters, a number and an uppercase letter"
           />
         </Label>
@@ -111,10 +112,13 @@ function Settings({ geek }) {
           <Input
             type="text"
             name="cpassword"
-            onChange={handleInputs}
+            onInput={handleInputs}
             placeholder="..."
           />
         </Label>
+        <br />
+        <p style={{ color: "white" }}> {errorMessage}</p>
+        <br />
         <Submit>Update</Submit>
       </FormForm>
     </FormContainer>

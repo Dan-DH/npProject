@@ -16,7 +16,7 @@ const resolvers = {
       try {
         // checkAuth(context);
         // TODO: comment in checkAuth;
-        const events = await Event.find(); //TODO: order them by start date
+        const events = await Event.find().sort({ ev_start_date: 1 }); //TODO: order them by start date
         return events;
       } catch (err) {
         throw new Error(err);
@@ -61,13 +61,18 @@ const resolvers = {
     async createUser(_, { username, email, password }) {
       password = await bcrypt.hash(password, 10);
 
-      const newUser = await User.create({
-        username: username.toLowerCase().trim(),
-        password: password,
-        email: email.toLowerCase().trim(),
-      });
+      console.log("this logs");
 
-      return newUser;
+      try {
+        const newUser = await User.create({
+          username: username.toLowerCase().trim(),
+          password: password,
+          email: email.toLowerCase().trim(),
+        });
+        return newUser;
+      } catch (err) {
+        throw new Error("Username / email already exists");
+      }
     },
 
     //CREATE NEW EVENT
@@ -79,8 +84,8 @@ const resolvers = {
         ev_type,
         ev_language,
         ev_online,
-        // ev_start_date,
-        // ev_end_date,
+        ev_start_date,
+        ev_end_date,
         ev_location,
         ev_description,
         ev_max_participants,
@@ -94,8 +99,8 @@ const resolvers = {
         ev_type,
         ev_language,
         ev_online,
-        // ev_start_date,
-        // ev_end_date,
+        ev_start_date,
+        ev_end_date,
         ev_location,
         ev_description,
         ev_max_participants,
@@ -149,14 +154,16 @@ const resolvers = {
       profile_pic !== "" ? (props.profile_pic = profile_pic) : true;
       console.log(userId);
       console.log(props);
-
-      const user = await User.findOneAndUpdate(
-        { _id: userId },
-        { $set: props },
-        { returnOriginal: false }
-      );
-      console.log(user);
-      return user;
+      try {
+        const user = await User.findOneAndUpdate(
+          { _id: userId },
+          { $set: props },
+          { returnOriginal: false }
+        );
+        return user;
+      } catch (err) {
+        throw new Error("Username / email already exists");
+      }
     },
 
     //USER BIO UPDATE

@@ -51,7 +51,6 @@ const typeDefs = gql`
   type Mutation {
     createUser(username: String!, email: String!, password: String!): User
 
-    #FIXME: dates
     createEvent(
       ev_organizer: String!
       ev_name: String!
@@ -59,8 +58,8 @@ const typeDefs = gql`
       ev_language: String
       ev_online: String!
       # ev_creation_date: Date!
-      # ev_start_date: Date!
-      # ev_end_date: Date!
+      ev_start_date: Date!
+      ev_end_date: Date!
       ev_location: String!
       ev_description: String
       ev_participants: [String]

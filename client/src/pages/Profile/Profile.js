@@ -19,7 +19,7 @@ import {
 import Settings from "../../components/Profile/Settings";
 import MyEvents from "../../components/Home/MyEvents/MyEvents";
 
-function Profile({ geek, eventCards, setEventCards }) {
+function Profile({ geek, setGeek, eventCards, setEventCards }) {
   //populating organized events
   const GET_EVENTS = gql`
     query GetEvents {
@@ -73,11 +73,10 @@ function Profile({ geek, eventCards, setEventCards }) {
               onSubmit={async (e) => {
                 try {
                   e.preventDefault();
-                  console.log(userBio);
                   await updateBio({
                     variables: userBio,
                   });
-                  //TODO:   lazyGetUser(); //render page with user info with GetUser lazy query
+                  setGeek({ ...geek, bio: userBio.bio });
                 } catch (err) {
                   console.log(err);
                 }

@@ -61,6 +61,15 @@ function Card({ event, user }) {
 
   const [userAttend] = useMutation(ATTEND);
 
+  function getEventDates(e) {
+    if (e !== null) {
+      e = new Date(e);
+      return `${e.getDate()}/${e.getMonth() + 1}/${e.getFullYear()} ${
+        e.getUTCHours() + 1
+      }:${e.getMinutes() === 0 ? e.getMinutes() + "0" : e.getMinutes()}`;
+    }
+  }
+
   return (
     <CardContainerList data-tip data-for={event.id}>
       <CardContainer>
@@ -82,8 +91,10 @@ function Card({ event, user }) {
             <LocationText>{event.ev_location}</LocationText>
           </CardLocation>
           <DatesDiv>
-            <CardStartDate>Begins: 04/02/22 3PM</CardStartDate>
-            <CardEndDate>Ends: 04/02/22 10PM</CardEndDate>
+            <CardStartDate>
+              From {getEventDates(event.ev_start_date)}
+            </CardStartDate>
+            <CardEndDate>to {getEventDates(event.ev_end_date)}</CardEndDate>
           </DatesDiv>
           <CardParticipants>
             <ParticipantsIcon icon={faUser} />

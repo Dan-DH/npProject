@@ -67,7 +67,7 @@ const SignUp = () => {
   const { login, email, password } = newUser;
   const [addUser, { data, loading, error }] = useMutation(SIGNUP);
   if (loading) return "Submitting...";
-  if (error) return error.message;
+  // if (error) setErrorMessage(error.message); --this was preventing the error handling
 
   //return form
   return (
@@ -89,15 +89,18 @@ const SignUp = () => {
                   setErrorMessage("Passwords do not match");
                   return false;
                 }
-
                 await addUser({
                   variables: {
                     username: login,
                     email: email,
                     password: password,
                   },
+                  onCompleted: ({ createUser }) => {
+                    navigate("../login");
+                  },
+                }).catch((err) => {
+                  setErrorMessage(err.message);
                 });
-                navigate("../login");
               }}
             >
               <Label>User Name</Label>
@@ -145,6 +148,7 @@ const SignUp = () => {
               ></Input>
               <br />
               <p style={{ color: "#9B0000" }}> {errorMessage}</p>
+              <br />
               <StyledButton>Sign Up</StyledButton>
             </form>
             Already got an account?

@@ -53,23 +53,27 @@ const LogIn = ({ geek, setGeek }) => {
               onSubmit={async (e) => {
                 e.preventDefault();
                 if (userLog.login !== "" && userLog.password !== "") {
-                  const { data, error, loading } = await logUser({
-                    variables: {
-                      username: userLog.login,
-                      password: userLog.password,
-                    },
-                    onCompleted: ({ login }) => {
-                      localStorage.setItem("auth_token", login.token);
-                      setGeek({
-                        id: login.id,
-                        email: login.email,
-                        profilePic: login.profile_pic,
-                        username: login.username,
-                        bio: login.bio,
-                      });
-                      navigate("../home");
-                    },
-                  });
+                  try {
+                    const { data, error, loading } = await logUser({
+                      variables: {
+                        username: userLog.login,
+                        password: userLog.password,
+                      },
+                      onCompleted: ({ login }) => {
+                        localStorage.setItem("auth_token", login.token);
+                        setGeek({
+                          id: login.id,
+                          email: login.email,
+                          profilePic: login.profile_pic,
+                          username: login.username,
+                          bio: login.bio,
+                        });
+                        navigate("../home");
+                      },
+                    });
+                  } catch (err) {
+                    setErrorMessage(err.message);
+                  }
                 } else {
                   setErrorMessage("Username / password cannot be empty");
                 }
@@ -95,6 +99,7 @@ const LogIn = ({ geek, setGeek }) => {
               ></Input>
               <br />
               <p style={{ color: "#9B0000" }}> {errorMessage}</p>
+              <br />
               <StyledButton>Log In</StyledButton>
             </form>
             Don't have an account yet?
