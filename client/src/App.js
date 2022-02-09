@@ -19,7 +19,6 @@ function App() {
   const [eventCards, setEventCards] = useState([]);
   document.title = "GeekOut!";
 
-  console.log("3", geek);
   if (geek.id) {
     return (
       <div className="page-container">

@@ -11,7 +11,7 @@ import {
 
 import { gql, useMutation } from "@apollo/client";
 
-function Settings({ geek }) {
+function Settings({ geek, setGeek }) {
   const [errorMessage, setErrorMessage] = useState("");
   const [userSettings, setUserSettings] = useState({
     userId: geek.id,
@@ -61,10 +61,18 @@ function Settings({ geek }) {
             e.preventDefault();
             await updateInfo({
               variables: userSettings,
+              onCompleted: ({ changeInfoUser }) => {
+                setGeek({
+                  ...geek,
+                  username: changeInfoUser.username,
+                  email: changeInfoUser.email,
+                  profilePic: changeInfoUser.profile_pic,
+                });
+              },
             });
-            //TODO:   lazyGetUser(); //render page with user info with GetUser lazy query
             e.target.reset();
             setErrorMessage("");
+            setErrorMessage("Data sucessfully updated");
           } catch (err) {
             setErrorMessage(err.message);
           }

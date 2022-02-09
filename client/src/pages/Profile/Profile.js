@@ -31,8 +31,8 @@ function Profile({ geek, setGeek, eventCards, setEventCards }) {
         ev_language
         ev_online
         ev_creation_date
-        # ev_start_date
-        # ev_end_date
+        ev_start_date
+        ev_end_date
         ev_location
         ev_description
         ev_max_participants
@@ -77,6 +77,8 @@ function Profile({ geek, setGeek, eventCards, setEventCards }) {
                     variables: userBio,
                   });
                   setGeek({ ...geek, bio: userBio.bio });
+                  console.log(geek);
+                  e.target.reset();
                 } catch (err) {
                   console.log(err);
                 }
@@ -93,7 +95,7 @@ function Profile({ geek, setGeek, eventCards, setEventCards }) {
             </form>
           </UserBioContainer>
           <SettingsContainer>
-            <Settings geek={geek} />
+            <Settings geek={geek} setGeek={setGeek} />
           </SettingsContainer>
         </UserBioColumn>
         <OrgEventsContainer>

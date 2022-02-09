@@ -14,9 +14,8 @@ const resolvers = {
     //RETURNS ALL EVENTS
     async getEvents(_, args, context) {
       try {
-        // checkAuth(context);
-        // TODO: comment in checkAuth;
-        const events = await Event.find().sort({ ev_start_date: 1 }); //TODO: order them by start date
+        //checkAuth(context);
+        const events = await Event.find().sort({ ev_start_date: 1 });
         return events;
       } catch (err) {
         throw new Error(err);
@@ -36,8 +35,8 @@ const resolvers = {
     //GET ALL USERS
     async getUsers(_, args, context) {
       try {
-        // checkAuth(context);
-        const users = await User.find(); //{}, { password: 0 }
+        //checkAuth(context);
+        const users = await User.find({}, { password: 0 });
         return users;
       } catch (err) {
         throw new Error(err);
