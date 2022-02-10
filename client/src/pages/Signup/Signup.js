@@ -152,7 +152,7 @@ const SignUp = () => {
               <StyledButton>Sign Up</StyledButton>
             </form>
             Already got an account?
-            <StyledLink to="../Login"> Log In</StyledLink>
+            <StyledLink to="../login"> Log In</StyledLink>
           </Col2Signup>
         </RowSignup>
       </GridSignup>

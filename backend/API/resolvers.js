@@ -192,7 +192,8 @@ const resolvers = {
       };
 
       const emailToken = jwt.sign(payload, passSecret, { expiresIn: "15m" });
-      const link = `http://localhost:3000/password-reset/${user.id}/${emailToken}`;
+      // const link = `http://localhost:3000/password-reset/${user.id}/${emailToken}`;
+      const link = `https://wonderful-kalam-0b5151.netlify.app/password-reset/${user.id}/${emailToken}`;
 
       //add token to user object
       const addToken = await User.findOneAndUpdate(

@@ -103,7 +103,12 @@ const LogIn = ({ geek, setGeek }) => {
               <StyledButton>Log In</StyledButton>
             </form>
             Don't have an account yet?
-            <StyledLink to="../Signup"> Sign Up</StyledLink>
+            <StyledLink to="../signup"> Sign Up</StyledLink>
+            <br />
+            <br />
+            <StyledLink to="../password-recovery">
+              Forgot your password?
+            </StyledLink>
           </Col2Login>
         </RowLogin>
       </GridLogin>
