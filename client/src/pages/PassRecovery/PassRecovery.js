@@ -66,10 +66,6 @@ const PassRecovery = () => {
               <p style={{ color: "#9B0000" }}> {errorMessage}</p>
               <StyledButton>Request password</StyledButton>
             </form>
-            {/* <StyledLinkDiv>
-              Don't have an account?{" "}
-              <StyledLink to="../Signup">Sign Up</StyledLink>
-            </StyledLinkDiv> */}
           </Col2Login>
         </RowLogin>
       </GridLogin>
