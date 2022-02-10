@@ -15,17 +15,9 @@ export const LeftCol = styled.div`
   width: 40%;
   overflow: scroll;
 `;
-// export const CreateEvent = styled.div`
-//   background-color: blue;
-// `;
-// export const Myevents = styled.div`
-//   background-color: red;
-// `;
+
 export const RightCol = styled.div`
   //   background-color: lightgrey;
   width: 60%;
   overflow: scroll;
 `;
-// export const Dashboard = styled.div`
-//   background-color: teal;
-// `;
