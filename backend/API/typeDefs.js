@@ -36,6 +36,7 @@ const typeDefs = gql`
     ev_description: String
     ev_max_participants: Int
     ev_participants: [String]!
+    ev_waiting_list: [String]!
   }
 
   type Query {

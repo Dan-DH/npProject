@@ -5,7 +5,11 @@ const jwt = require("jsonwebtoken");
 // const { UserInputError } = require("apollo-server-express");
 const { ApolloServer, UserInputError } = require("apollo-server");
 const checkAuth = require("../utils/checkAuth");
-const { passRecoveryEmail } = require("../API/mailer/mailer");
+const {
+  passRecoveryEmail,
+  eventSignUpEmail,
+  eventCancellationEmail,
+} = require("../API/mailer/mailer");
 
 const secret = process.env.SECRET;
 
@@ -192,8 +196,8 @@ const resolvers = {
       };
 
       const emailToken = jwt.sign(payload, passSecret, { expiresIn: "15m" });
-      // const link = `http://localhost:3000/password-reset/${user.id}/${emailToken}`;
-      const link = `https://wonderful-kalam-0b5151.netlify.app/password-reset/${user.id}/${emailToken}`;
+      const link = `http://localhost:3000/password-reset/${user.id}/${emailToken}`;
+      // const link = `https://geekout.netlify.app/password-reset/${user.id}/${emailToken}`;
 
       //add token to user object
       const addToken = await User.findOneAndUpdate(
@@ -217,12 +221,15 @@ const resolvers = {
 
       try {
         const payload = jwt.verify(token, passSecret);
+        console.log("payload", payload);
         password = await bcrypt.hash(password, 10);
         await User.findOneAndUpdate({ _id: id }, { $set: { password } });
         return "Password updated";
       } catch (error) {
-        console.log(error);
+        throw new Error(error);
       }
+
+      return "All good and dandy";
     },
 
     //DELETE USER
@@ -233,20 +240,47 @@ const resolvers = {
       return "User deleted";
     },
 
-    //DELETE EVENT
+    //DELETE EVENT --not used at the moment. Event deletion in USER EVENT SIGNUP
     async deleteEvent(_, { id }, context) {
       //checkAuth(context);
       const event = await Event.deleteOne({ _id: id });
+      console.log(event);
       if (event.deletedCount === 0) throw new Error("Event doesn't exist");
       //TODO: add send email, then return
       return "Event deleted";
     },
 
     //USER EVENT SIGNUP
+    //TODO: add a function to handle checking waiting list and pushing people to attending list if needed
+    //TODO: add email confirmation when signing up for an event, and also the day before
+    //TODO: create 'unsubscribe' page to unsubscribe from emails
     async attend(_, { userId, eventId }, context) {
-      //checkAuth(context);
-      const check = await User.findOne({ _id: userId });
-      if (check.attendingEvents.includes(eventId)) {
+      checkAuth(context);
+      // const check = await User.findOne({ _id: userId });
+      const check = await Event.findById(eventId);
+      //check if user is the organizer and delete event instead of unsubscribing
+      if (check.ev_organizer === userId) {
+        //remove event from participants' lists and inform them via email
+        check.ev_participants.map(async (p) => {
+          const user = await User.findOneAndUpdate(
+            { _id: p },
+            {
+              $pull: {
+                attendingEvents: eventId,
+              },
+            }
+          );
+          if (p !== check.ev_organizer) {
+            eventCancellationEmail(user.email, check);
+          }
+        });
+        const event = await Event.deleteOne({ _id: eventId });
+        if (event.deletedCount === 0) throw new Error("Event doesn't exist");
+        return "Event deleted";
+      }
+
+      //check if user is attending the event and unsubscribe them from it
+      if (check.ev_participants.includes(userId)) {
         const attend = await User.updateOne(
           { _id: userId },
           {
@@ -264,8 +298,52 @@ const resolvers = {
             },
           }
         );
+
+        //check if there are users in the waiting list
+        if (check.ev_waiting_list.length > 0) {
+          //add first user in waiting list to event
+          //FIXME: pull and pop
+          //TODO: add event id to pushed user's attending array
+          Event.findOneAndUpdate(
+            { id: check._id },
+            {
+              $push: { ev_participants: check.ev_waiting_list[0] },
+              $pop: { ev_waiting_list: -1 },
+            }
+          );
+          //email user to let them know they have been added to the event
+          const addedUser = await User.findOne({
+            id: check.ev_waiting_list[0],
+          });
+          eventSignUpEmail(check, addedUser.email);
+        }
       } else {
-        const attend = await User.updateOne(
+        //if user was not attending the event, subscribe them to it
+        const maxCheck = await Event.findById(eventId);
+        //if event is full, add user to waiting list
+        if (maxCheck.ev_participants.length >= maxCheck.ev_max_participants) {
+          const attend = await User.findOneAndUpdate(
+            { _id: userId },
+            {
+              $push: {
+                waitingEvents: eventId,
+              },
+            }
+          );
+
+          const event = await Event.findOneAndUpdate(
+            { _id: eventId },
+            {
+              $push: {
+                ev_waiting_list: userId,
+              },
+            }
+          );
+
+          return "Added to waiting list";
+        }
+        //if event is not full, add user to attending list
+        const attend = await User.findOneAndUpdate(
           { _id: userId },
           {
             $push: {
@@ -274,7 +352,7 @@ const resolvers = {
           }
         );
 
-        const event = await Event.updateOne(
+        const event = await Event.findOneAndUpdate(
           { _id: eventId },
           {
             $push: {
@@ -282,6 +360,8 @@ const resolvers = {
             },
           }
         );
+        console.log(attend.email, event);
+        eventSignUpEmail(attend.email, event);
       }
 
       return "Operation successful";

@@ -13,6 +13,7 @@ const eventSchema = new Schema({
   ev_description: String,
   ev_max_participants: Number,
   ev_participants: [String],
+  ev_waiting_list: [String],
   comments: [
     {
       author: { type: Schema.Types.ObjectId, ref: "users" },

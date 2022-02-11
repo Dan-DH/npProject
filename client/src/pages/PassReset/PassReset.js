@@ -26,8 +26,8 @@ const SignUp = () => {
   const url = window.location.pathname.split("/");
   const urlUserId = url[2];
   const urlToken = url[3];
-  console.log(urlUserId);
-  console.log(urlToken);
+  // console.log(urlUserId);
+  // console.log(urlToken);
 
   const [errorMessage, setErrorMessage] = useState("");
   const [passReset, setPassReset] = useState({
@@ -80,15 +80,26 @@ const SignUp = () => {
                   setErrorMessage("Passwords do not match");
                   return false;
                 }
-
-                await passwordReset({
-                  variables: {
-                    id: urlUserId,
-                    token: urlToken,
-                    password: passReset.password,
-                  },
-                });
-                navigate("../login");
+                try {
+                  await passwordReset({
+                    variables: {
+                      id: urlUserId,
+                      token: urlToken,
+                      password: passReset.password,
+                    },
+                  });
+                  navigate("../login");
+                } catch (error) {
+                  if (
+                    error.message === "JsonWebTokenError: invalid signature"
+                  ) {
+                    setErrorMessage(
+                      "Invalid/expired token. Please request a new one"
+                    );
+                  } else {
+                    setErrorMessage(error.message);
+                  }
+                }
               }}
             >
               <Label>New password</Label>
@@ -116,6 +127,7 @@ const SignUp = () => {
               ></Input>
               <br />
               <p style={{ color: "#9B0000" }}> {errorMessage}</p>
+              <br />
               <StyledButton>Submit</StyledButton>
             </form>
           </Col2Signup>

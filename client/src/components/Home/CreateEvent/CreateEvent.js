@@ -67,7 +67,7 @@ const CreateEvent = ({ user, lazyEvents }) => {
         onSubmit={async (e) => {
           try {
             e.preventDefault();
-            console.log(eventLog);
+
             await logEvent({
               variables: {
                 evOrganizer: eventLog.evOrganizer,

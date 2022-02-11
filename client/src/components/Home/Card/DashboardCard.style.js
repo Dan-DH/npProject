@@ -36,6 +36,10 @@ export const InfoBox = styled.div`
   background-color: #353944;
   color: white;
   padding: 0 1vh;
+  overflow: auto;
+  // scrollbar-gutter: stable;
+  white-space: nowrap;
+  // display: block;
 `;
 
 export const CardTitle = styled.h2``;

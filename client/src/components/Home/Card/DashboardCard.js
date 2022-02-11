@@ -109,10 +109,26 @@ function Card({ event, user, trigger, setTrigger }) {
         <UserIconContainer
           style={{ backgroundColor: attending }}
           onClick={async () => {
+            var org_check;
+            if (event.ev_organizer === user) {
+              org_check = window.confirm(
+                "You are the organizer of this event. If you leave, the event will be deleted. This action cannot be undone."
+              );
+              if (!org_check) {
+                return false;
+              }
+            }
             await userAttend({
               variables: {
                 userId: user,
                 eventId: event.id,
+              },
+              onCompleted: ({ attend }) => {
+                if (attend === "Added to waiting list") {
+                  window.alert(
+                    "The event is full, you have been added to its waiting list"
+                  );
+                }
               },
             });
             setIsAttending(!isAttending);
@@ -127,11 +143,11 @@ function Card({ event, user, trigger, setTrigger }) {
           ? event.ev_description
           : "This event has no description"}
         <br />
-        <img
+        {/* <img
           src="https://ih0.redbubble.net/image.430476749.0382/flat,800x800,070,f.u4.jpg"
           alt="profile"
           style={{ width: "50px" }}
-        />
+        /> */}
       </ReactTooltipStyled>
     </CardContainerList>
   );
