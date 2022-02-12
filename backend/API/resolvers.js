@@ -302,20 +302,24 @@ const resolvers = {
         //check if there are users in the waiting list
         if (check.ev_waiting_list.length > 0) {
           //add first user in waiting list to event
-          //FIXME: pull and pop
-          //TODO: add event id to pushed user's attending array
-          Event.findOneAndUpdate(
-            { id: check._id },
+          await Event.findOneAndUpdate(
+            { _id: check.id },
             {
               $push: { ev_participants: check.ev_waiting_list[0] },
               $pop: { ev_waiting_list: -1 },
             }
           );
-          //email user to let them know they have been added to the event
-          const addedUser = await User.findOne({
-            id: check.ev_waiting_list[0],
-          });
-          eventSignUpEmail(check, addedUser.email);
+          //add event to user's attendingEvents list
+          const addedUser = await User.findOneAndUpdate(
+            {
+              _id: check.ev_waiting_list[0],
+            },
+            {
+              $push: { attendingEvents: check.id },
+            }
+          );
+          //email user to inform them they have been added to the event
+          eventSignUpEmail(addedUser.email, check);
         }
       } else {
         //if user was not attending the event, subscribe them to it

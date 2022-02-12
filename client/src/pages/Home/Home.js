@@ -4,6 +4,7 @@ import Collapsible from "react-collapsible";
 
 import CreateEvent from "../../components/Home/CreateEvent/CreateEvent";
 import MyEvents from "../../components/Home/MyEvents/MyEvents";
+import MyAwaitedEvents from "../../components/Home/MyAwaitedEvents/MyAwaitedEvents";
 import { Filters } from "../../components/Home/Filters/Filters";
 import Dashboard from "../../components/Home/Dashboard/Dashboard";
 import { HomeContainer, LeftCol, RightCol } from "./Home.style";
@@ -26,6 +27,7 @@ function Home({ geek, setGeek, eventCards, setEventCards }) {
         ev_description
         ev_max_participants
         ev_participants
+        ev_waiting_list
       }
     }
   `;
@@ -50,6 +52,13 @@ function Home({ geek, setGeek, eventCards, setEventCards }) {
       <HomeContainer>
         <LeftCol>
           <MyEvents
+            eventCards={eventCards}
+            user={user}
+            loading={loading}
+            data={data}
+          />
+          {/* {geek.MyAwaitedEvents.length > 0 &&} */}
+          <MyAwaitedEvents
             eventCards={eventCards}
             user={user}
             loading={loading}

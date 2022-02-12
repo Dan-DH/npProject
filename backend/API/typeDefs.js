@@ -19,6 +19,7 @@ const typeDefs = gql`
     ban_timer: Int!
     #myEvents: [Event]!
     attendingEvents: [String]!
+    waitingEvents: [String]!
     token: String
   }
 
@@ -29,7 +30,7 @@ const typeDefs = gql`
     ev_type: String!
     ev_language: String
     ev_online: String!
-    ev_creation_date: Date #make compulsory
+    ev_creation_date: Date
     ev_start_date: Date
     ev_end_date: Date
     ev_location: String!
@@ -81,11 +82,6 @@ const typeDefs = gql`
     #TODO: add logic. If max attendants, add 'Event full' to # participants and change button to 'Join waitlist'
     attend(userId: ID!, eventId: ID!): String!
 
-    #TODO: this action triggers:
-    # -first person (fp) in the waiting list gets added to the event
-    # -fp is removed from waiting list
-    # -fp receives an email informing them that they are now part of the event
-    #String!
     unattend(userId: ID!, eventId: ID!): String!
 
     changeInfoUser(
