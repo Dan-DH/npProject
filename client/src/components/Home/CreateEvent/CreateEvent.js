@@ -152,7 +152,7 @@ const CreateEvent = ({ user, lazyEvents }) => {
           />
         </Label>
         <Label>
-          <p>Start time</p>
+          <p>Start date</p>
           <Input
             type="datetime-local"
             name="evStart"
@@ -162,7 +162,7 @@ const CreateEvent = ({ user, lazyEvents }) => {
           />
         </Label>
         <Label>
-          <p>End time</p>
+          <p>End date</p>
           <Input
             type="datetime-local"
             name="evEnd"
