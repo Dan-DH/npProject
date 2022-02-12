@@ -22,13 +22,14 @@ export const CardContainer = styled.div`
 
 export const CardImage = styled.div`
   width: 15%;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const CardImageIcon = styled(FontAwesomeIcon)`
   color: white;
-  font-size: 7vh;
-  margin-top: 1vh;
+  font-size: 3vw;
 `;
 
 export const InfoBox = styled.div`
@@ -37,9 +38,7 @@ export const InfoBox = styled.div`
   color: white;
   padding: 0 1vh;
   overflow: auto;
-  // scrollbar-gutter: stable;
   white-space: nowrap;
-  // display: block;
 `;
 
 export const CardTitle = styled.h2``;
@@ -88,11 +87,28 @@ export const NumberOfParticipants = styled.p`
 export const UserIconContainer = styled.div`
   cursor: pointer;
   width: 15%;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const UserIcon = styled(FontAwesomeIcon)`
   color: white;
-  font-size: 7vh;
+  font-size: 3vw;
+  margin: auto;
+`;
+
+export const DeleteEventContainer = styled.div`
+  background-color: #b32201;
+  cursor: pointer;
+  width: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const DeleteIcon = styled(FontAwesomeIcon)`
+  color: white;
+  font-size: 3vw;
   margin-top: 1vh;
 `;

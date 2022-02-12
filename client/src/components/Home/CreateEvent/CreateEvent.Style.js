@@ -5,7 +5,7 @@ export const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 2vh;
+  margin-top: 5vh;
 `;
 
 export const FormTitle = styled.h1`

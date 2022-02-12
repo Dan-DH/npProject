@@ -14,6 +14,8 @@ import {
 import { gql, useMutation } from "@apollo/client";
 
 const CreateEvent = ({ user, lazyEvents }) => {
+  const [errorMessage, setErrorMessage] = useState("");
+
   const [eventLog, setEventLog] = useState({
     evOrganizer: user,
     evName: "",
@@ -67,6 +69,18 @@ const CreateEvent = ({ user, lazyEvents }) => {
         onSubmit={async (e) => {
           try {
             e.preventDefault();
+            const timeNow = new Date();
+
+            if (timeNow.getTime() > new Date(eventLog.evStart).getTime()) {
+              return setErrorMessage("Start date can't be in the past");
+            }
+
+            if (
+              new Date(eventLog.evStart).getTime() >
+              new Date(eventLog.evEnd).getTime()
+            ) {
+              return setErrorMessage("Start date must occur before end date");
+            }
 
             await logEvent({
               variables: {
@@ -83,6 +97,7 @@ const CreateEvent = ({ user, lazyEvents }) => {
             });
             e.target.reset();
             lazyEvents();
+            setErrorMessage("");
           } catch (err) {
             console.log(err);
           }
@@ -173,6 +188,9 @@ const CreateEvent = ({ user, lazyEvents }) => {
             placeholder="..."
           />
         </Label>
+        <br />
+        <p style={{ color: "white", textAlign: "center" }}> {errorMessage}</p>
+        <br />
         <Submit>Create</Submit>
       </FormForm>
     </FormContainer>

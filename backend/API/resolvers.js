@@ -15,11 +15,14 @@ const secret = process.env.SECRET;
 
 const resolvers = {
   Query: {
-    //RETURNS ALL EVENTS
+    //RETURNS ALL EVENTS -where endDate > currentDate!
     async getEvents(_, args, context) {
       try {
         //checkAuth(context);
-        const events = await Event.find().sort({ ev_start_date: 1 });
+        const timeNow = new Date();
+        const events = await Event.find({
+          ev_end_date: { $gt: timeNow.getTime() },
+        }).sort({ ev_start_date: 1 });
         return events;
       } catch (err) {
         throw new Error(err);
@@ -95,7 +98,7 @@ const resolvers = {
       },
       context
     ) => {
-      //checkAuth(context);
+      checkAuth(context);
       const newEvent = Event.create({
         ev_organizer,
         ev_name,
@@ -208,7 +211,7 @@ const resolvers = {
       passRecoveryEmail(user.email, link);
       //TODO: react. Add message 'email has been sent'
 
-      return addToken; //it's working
+      return addToken;
     },
 
     //PASSWORD RESET
@@ -234,7 +237,7 @@ const resolvers = {
 
     //DELETE USER
     async deleteUser(_, { id }, context) {
-      //checkAuth(context);
+      checkAuth(context);
       const user = await User.deleteOne({ _id: id });
       //TODO: add logic (can't always return success)
       return "User deleted";
@@ -242,7 +245,7 @@ const resolvers = {
 
     //DELETE EVENT --not used at the moment. Event deletion in USER EVENT SIGNUP
     async deleteEvent(_, { id }, context) {
-      //checkAuth(context);
+      checkAuth(context);
       const event = await Event.deleteOne({ _id: id });
       console.log(event);
       if (event.deletedCount === 0) throw new Error("Event doesn't exist");
@@ -251,10 +254,13 @@ const resolvers = {
     },
 
     //USER EVENT SIGNUP
-    //TODO: add a function to handle checking waiting list and pushing people to attending list if needed
-    //TODO: add email confirmation when signing up for an event, and also the day before
-    //TODO: create 'unsubscribe' page to unsubscribe from emails
     async attend(_, { userId, eventId }, context) {
+      //here's the logic for this function:
+      // 1 we check if the user is the owner of the event. If so, we delete it
+      // 2 we check if the user is on the waiting list. If so, we take them out
+      // 3 we check if the user is already attending the event. If so, we take them out
+      // 3a we add the first user of the waiting list to the event (if applicable)
+      // 4 we add the user to the attending list
       checkAuth(context);
       // const check = await User.findOne({ _id: userId });
       const check = await Event.findById(eventId);
@@ -277,6 +283,19 @@ const resolvers = {
         const event = await Event.deleteOne({ _id: eventId });
         if (event.deletedCount === 0) throw new Error("Event doesn't exist");
         return "Event deleted";
+      }
+
+      //check if user is on the attending list, and remove them from it
+      if (check.ev_waiting_list.includes(userId)) {
+        const user = await User.findOneAndUpdate(
+          { _id: userId },
+          { $pull: { waitingEvents: eventId } }
+        );
+        const event = await Event.findOneAndUpdate(
+          { _id: eventId },
+          { $pull: { ev_waiting_list: userId } }
+        );
+        return "User removed from waiting list";
       }
 
       //check if user is attending the event and unsubscribe them from it
@@ -321,6 +340,8 @@ const resolvers = {
           //email user to inform them they have been added to the event
           eventSignUpEmail(addedUser.email, check);
         }
+
+        return "User removed from event list";
       } else {
         //if user was not attending the event, subscribe them to it
         const maxCheck = await Event.findById(eventId);
@@ -366,9 +387,8 @@ const resolvers = {
         );
         console.log(attend.email, event);
         eventSignUpEmail(attend.email, event);
+        return "User added to the event";
       }
-
-      return "Operation successful";
     },
   },
 };

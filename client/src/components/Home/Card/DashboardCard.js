@@ -8,6 +8,7 @@ import {
   faBeer,
   faWifi,
   faMapMarkedAlt,
+  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 
 import {
@@ -30,10 +31,12 @@ import {
   UserIcon,
   UserIconContainer,
   ReactTooltipStyled,
+  DeleteEventContainer,
+  DeleteIcon,
 } from "./DashboardCard.style";
 import { gql, useMutation } from "@apollo/client";
 
-function Card({ event, user, trigger, setTrigger }) {
+function Card({ event, user, trigger, setTrigger, pathCheck }) {
   const iconObject = {
     Boardgames: faDice,
     Hangout: faBeer,
@@ -55,6 +58,12 @@ function Card({ event, user, trigger, setTrigger }) {
   );
 
   const attending = isAttending ? "green" : "grey";
+
+  const [isWaiting, setIsWaiting] = useState(
+    event.ev_waiting_list.includes(user)
+  );
+
+  const waiting = isWaiting ? "#e9892e" : attending;
 
   const ATTEND = gql`
     mutation Attend($userId: ID!, $eventId: ID!) {
@@ -106,37 +115,59 @@ function Card({ event, user, trigger, setTrigger }) {
             </NumberOfParticipants>
           </CardParticipants>
         </InfoBox>
-        <UserIconContainer
-          style={{ backgroundColor: attending }}
-          onClick={async () => {
-            var org_check;
-            if (event.ev_organizer === user) {
-              org_check = window.confirm(
-                "You are the organizer of this event. If you leave, the event will be deleted. This action cannot be undone."
+        {event.ev_organizer !== user ? (
+          <UserIconContainer
+            style={{ backgroundColor: waiting }}
+            onClick={async () => {
+              var org_check;
+              if (event.ev_organizer === user) {
+                org_check = window.confirm(
+                  "You are the organizer of this event. If you leave, the event will be deleted. This action cannot be undone."
+                );
+                if (!org_check) {
+                  return false;
+                }
+              }
+              await userAttend({
+                variables: {
+                  userId: user,
+                  eventId: event.id,
+                },
+                onCompleted: ({ attend }) => {
+                  if (attend === "Added to waiting list") {
+                    window.alert(
+                      "The event is full, you have been added to its waiting list"
+                    );
+                  }
+                },
+              });
+              setIsWaiting(!isWaiting);
+              setTrigger(!trigger);
+            }}
+          >
+            <UserIcon icon={faUser} />
+          </UserIconContainer>
+        ) : (
+          <DeleteEventContainer
+            onClick={async () => {
+              const org_check = window.confirm(
+                "This event will be deleted, and a notification email sent to its attendants. This action cannot be undone."
               );
               if (!org_check) {
                 return false;
               }
-            }
-            await userAttend({
-              variables: {
-                userId: user,
-                eventId: event.id,
-              },
-              onCompleted: ({ attend }) => {
-                if (attend === "Added to waiting list") {
-                  window.alert(
-                    "The event is full, you have been added to its waiting list"
-                  );
-                }
-              },
-            });
-            setIsAttending(!isAttending);
-            setTrigger(!trigger);
-          }}
-        >
-          <UserIcon icon={faUser} />
-        </UserIconContainer>
+              await userAttend({
+                variables: {
+                  userId: user,
+                  eventId: event.id,
+                },
+              });
+              setTrigger(!trigger);
+            }}
+          >
+            <DeleteIcon icon={faTrash} />
+          </DeleteEventContainer>
+        )}
       </CardContainer>
       <ReactTooltipStyled id={event.id} place="bottom" type="dark">
         {event.ev_description

@@ -8,6 +8,7 @@ import {
   EventList,
   DashboardTitle,
 } from "./Dashboard.style";
+import EmptyCard from "../Card/EmptyCard";
 
 const Dashboard = ({
   eventCards,
@@ -17,14 +18,18 @@ const Dashboard = ({
   trigger,
   setTrigger,
 }) => {
+  const myOrganizedEvents = eventCards.filter((e) => e.ev_organizer === user);
+  const pathCheck = window.location.href.indexOf("profile");
   return (
     <DashboardContainer>
-      <DashboardTitle>UPCOMING EVENTS</DashboardTitle>
+      <DashboardTitle>
+        {pathCheck === -1 ? "UPCOMING EVENTS" : "ORGANIZED EVENTS"}
+      </DashboardTitle>
       {loading ? (
         <h1>Loading events...</h1>
       ) : (
         <EventList>
-          {data &&
+          {data && pathCheck === -1 ? (
             eventCards.map((event) => (
               <Card
                 key={event.id}
@@ -32,8 +37,23 @@ const Dashboard = ({
                 user={user}
                 trigger={trigger}
                 setTrigger={setTrigger}
+                pathCheck={pathCheck}
               />
-            ))}
+            ))
+          ) : myOrganizedEvents.length > 0 ? (
+            myOrganizedEvents.map((event) => (
+              <Card
+                key={event.id}
+                event={event}
+                user={user}
+                trigger={trigger}
+                setTrigger={setTrigger}
+                pathCheck={pathCheck}
+              />
+            ))
+          ) : (
+            <EmptyCard myOrganizedEvents={myOrganizedEvents} />
+          )}
         </EventList>
       )}
     </DashboardContainer>

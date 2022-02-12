@@ -1,14 +1,19 @@
 import { React, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { useQuery, gql, useMutation } from "@apollo/client";
-import Card from "../Card/MyEventsCard";
+// import Card from "../Card/MyEventsCard";
+import Card from "../Card/DashboardCard";
+// import {
+//   DashboardContainer,
+//   EventList,
+//   MyEventsTitle,
+//   StyledCollapsible,
+// } from "../MyEvents/MyEvents.style";
 import {
-  MyEventsContainer,
+  DashboardContainer,
   EventList,
-  MyEventsTitle,
-  StyledCollapsible,
-} from "../MyEvents/MyEvents.style";
-import EmptyCard from "../Card/EmptyCard";
+  DashboardTitle,
+} from "../Dashboard/Dashboard.style";
 import Collapsible from "react-collapsible";
 
 const MyEvents = ({ eventCards, user, loading, data }) => {
@@ -21,16 +26,17 @@ const MyEvents = ({ eventCards, user, loading, data }) => {
       {loading ? (
         <h1>Loading events...</h1>
       ) : myAwaitedEvents.length > 0 ? (
-        <MyEventsContainer>
-          <StyledCollapsible trigger={"MY WAITING LIST"} open="true">
-            <EventList>
-              {data &&
-                myAwaitedEvents.map((e) => (
-                  <Card key={e.id} event={e} user={user} />
-                ))}
-            </EventList>
-          </StyledCollapsible>
-        </MyEventsContainer>
+        <DashboardContainer>
+          {/* <StyledCollapsible trigger={"MY WAITING LIST"} open="true"> */}
+          <DashboardTitle>MY WAITING LIST</DashboardTitle>
+          <EventList>
+            {data &&
+              myAwaitedEvents.map((e) => (
+                <Card key={e.id} event={e} user={user} />
+              ))}
+          </EventList>
+          {/* </StyledCollapsible> */}
+        </DashboardContainer>
       ) : (
         true
       )}

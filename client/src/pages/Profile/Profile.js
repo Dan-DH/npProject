@@ -18,6 +18,7 @@ import {
 
 import Settings from "../../components/Profile/Settings";
 import MyEvents from "../../components/Home/MyEvents/MyEvents";
+import Dashboard from "../../components/Home/Dashboard/Dashboard";
 
 function Profile({ geek, setGeek, eventCards, setEventCards }) {
   //populating organized events
@@ -99,7 +100,7 @@ function Profile({ geek, setGeek, eventCards, setEventCards }) {
           </SettingsContainer>
         </UserBioColumn>
         <OrgEventsContainer>
-          <MyEvents
+          <Dashboard
             eventCards={eventCards}
             user={geek.id}
             loading={loading}

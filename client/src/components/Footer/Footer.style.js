@@ -4,10 +4,10 @@ export const FooterContainer = styled.div`
   background: black;
   height: 8vh;
   margin-top: auto;
+  align-items: center;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
+  -webkit-justify-content: space-evenly;
 `;
 
 export const FooterLink = styled.a`
