@@ -22,7 +22,9 @@ const MyEvents = ({ eventCards, user, loading, data }) => {
       </MyEventsTitle> */}
       <StyledCollapsible trigger="MY EVENTS" open="true">
         {loading ? (
-          <h1>Loading events...</h1>
+          <h1 style={{ color: "white", textAlign: "center" }}>
+            Loading events...
+          </h1>
         ) : (
           <EventList>
             {data && myEvents.length > 0 ? (

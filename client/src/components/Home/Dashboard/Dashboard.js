@@ -26,7 +26,9 @@ const Dashboard = ({
         {pathCheck === -1 ? "UPCOMING EVENTS" : "ORGANIZED EVENTS"}
       </DashboardTitle>
       {loading ? (
-        <h1>Loading events...</h1>
+        <h1 style={{ color: "white", textAlign: "center" }}>
+          Loading events...
+        </h1>
       ) : (
         <EventList>
           {data && pathCheck === -1 ? (

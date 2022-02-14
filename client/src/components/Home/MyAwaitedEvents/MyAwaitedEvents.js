@@ -24,7 +24,9 @@ const MyEvents = ({ eventCards, user, loading, data }) => {
   return (
     <div>
       {loading ? (
-        <h1>Loading events...</h1>
+        <h1 style={{ color: "white", textAlign: "center" }}>
+          Loading events...
+        </h1>
       ) : myAwaitedEvents.length > 0 ? (
         <DashboardContainer>
           {/* <StyledCollapsible trigger={"MY WAITING LIST"} open="true"> */}

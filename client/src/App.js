@@ -15,8 +15,24 @@ import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 
 function App() {
-  const [geek, setGeek] = useState({});
-  const [eventCards, setEventCards] = useState([]);
+  const [geek, setGeek] = useState(
+    localStorage.getItem("geek") ? JSON.parse(localStorage.getItem("geek")) : {}
+  );
+
+  useEffect(() => {
+    localStorage.setItem("geek", JSON.stringify(geek));
+  }, [geek]);
+
+  const [eventCards, setEventCards] = useState(
+    localStorage.getItem("eventCards")
+      ? JSON.parse(localStorage.getItem("eventCards"))
+      : []
+  );
+
+  useEffect(() => {
+    localStorage.setItem("eventCards", JSON.stringify(eventCards));
+  }, [eventCards]);
+
   document.title = "GeekOut!";
 
   if (geek.id) {
