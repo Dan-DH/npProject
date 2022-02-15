@@ -1,25 +1,26 @@
 import { React, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { useQuery, gql, useMutation } from "@apollo/client";
-// import Card from "../Card/MyEventsCard";
+
 import Card from "../Card/DashboardCard";
-// import {
-//   DashboardContainer,
-//   EventList,
-//   MyEventsTitle,
-//   StyledCollapsible,
-// } from "../MyEvents/MyEvents.style";
+
 import {
   DashboardContainer,
   EventList,
   DashboardTitle,
 } from "../Dashboard/Dashboard.style";
-import Collapsible from "react-collapsible";
+const mobile = require("is-mobile");
 
-const MyEvents = ({ eventCards, user, loading, data }) => {
+const MyEvents = ({ eventCards, user, loading, data, trigger, setTrigger }) => {
   var myAwaitedEvents = eventCards.filter((e) =>
     e.ev_waiting_list.includes(user)
   );
+
+  //accordion state and function
+  const [show, setShow] = useState(mobile() ? false : true);
+  const handleOpen = () => {
+    setShow(!show); // Toggle accordion
+  };
 
   return (
     <div>
@@ -29,15 +30,21 @@ const MyEvents = ({ eventCards, user, loading, data }) => {
         </h1>
       ) : myAwaitedEvents.length > 0 ? (
         <DashboardContainer>
-          {/* <StyledCollapsible trigger={"MY WAITING LIST"} open="true"> */}
-          <DashboardTitle>MY WAITING LIST</DashboardTitle>
+          <DashboardTitle onClick={handleOpen}>MY WAITING LIST</DashboardTitle>
           <EventList>
-            {data &&
-              myAwaitedEvents.map((e) => (
-                <Card key={e.id} event={e} user={user} />
-              ))}
+            {show
+              ? data &&
+                myAwaitedEvents.map((e) => (
+                  <Card
+                    key={e.id}
+                    event={e}
+                    user={user}
+                    trigger={trigger}
+                    setTrigger={setTrigger}
+                  />
+                ))
+              : true}
           </EventList>
-          {/* </StyledCollapsible> */}
         </DashboardContainer>
       ) : (
         true

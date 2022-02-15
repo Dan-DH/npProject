@@ -13,7 +13,7 @@ import {
   OrgEventsContainer,
   SettingsContainer,
   UserBioColumn,
-  SettingsColumn,
+  Form,
 } from "./Profile.Style";
 
 import Settings from "../../components/Profile/Settings";
@@ -70,7 +70,7 @@ function Profile({ geek, setGeek, eventCards, setEventCards }) {
           </UserImageContainer>
           <UserBioContainer>
             <UserBio>{geek.bio}</UserBio>
-            <form
+            <Form
               onSubmit={async (e) => {
                 try {
                   e.preventDefault();
@@ -93,7 +93,7 @@ function Profile({ geek, setGeek, eventCards, setEventCards }) {
               />
               <br />
               <Submit>Post</Submit>
-            </form>
+            </Form>
           </UserBioContainer>
           <SettingsContainer>
             <Settings geek={geek} setGeek={setGeek} />

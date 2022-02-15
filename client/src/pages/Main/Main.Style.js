@@ -16,7 +16,7 @@ export const MainSynopsis = styled.div`
 export const SynopsisImage = styled.img`
   width: 100%;
 
-  @media ${DeviceMin.md} {
+  @media ${DeviceMin.lg} {
     width: 50%;
   }
 `;
@@ -31,7 +31,7 @@ export const SynopsisDiv = styled.div`
   padding: 2vh;
   font-size: 2vh;
 
-  @media ${DeviceMin.md} {
+  @media ${DeviceMin.lg} {
     font-size: 3vh;
     width: 50%;
     padding: 0;
@@ -42,7 +42,7 @@ export const SynopsisParagrahp = styled.p`
   max-width: 70%;
   margin: auto;
 
-  @media ${DeviceMin.md} {
+  @media ${DeviceMin.lg} {
     max-width: 100%;
   }
 `;
@@ -58,7 +58,7 @@ export const InstructionsTitle = styled.h2`
   text-align: center;
   margin: 5vh 0;
 
-  @media ${DeviceMin.md} {
+  @media ${DeviceMin.lg} {
     font-size: 4vh;
   }
 `;
@@ -77,7 +77,7 @@ export const StepDiv = styled.div`
   flex-direction: column;
   padding-top: 1vh;
 
-  @media ${DeviceMin.md} {
+  @media ${DeviceMin.lg} {
     width: 50%;
   }
 `;
@@ -92,7 +92,7 @@ export const StepText = styled.p`
   font-size: 2vh;
   margin: auto 2vh;
 
-  @media ${DeviceMin.md} {
+  @media ${DeviceMin.lg} {
     font-size: 3vh;
   }
 `;
@@ -106,7 +106,7 @@ export const StepNumber = styled.p`
   text-align: center;
   border: 2px solid white;
 
-  @media ${DeviceMin.md} {
+  @media ${DeviceMin.lg} {
     font-size: 4rem;
     min-width: 5rem;
     height: 5rem;
@@ -117,7 +117,7 @@ export const StepNumber = styled.p`
 export const InstructionsImage = styled.img`
   width: 100%;
 
-  @media ${DeviceMin.md} {
+  @media ${DeviceMin.lg} {
     width: 50%;
   }
 `;

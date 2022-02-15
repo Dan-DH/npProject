@@ -14,6 +14,7 @@ export const FormTitle = styled.h1`
   background-color: #b32201;
   width: 80%;
   margin: 0 auto;
+  cursor: pointer;
 `;
 
 export const FormForm = styled.form`
@@ -28,6 +29,10 @@ export const Label = styled.label`
   color: white;
   margin: 0.5vh;
   background-color: #b32201;
+`;
+
+export const Paragraph = styled.p`
+  margin-left: 0.5vh;
 `;
 
 export const Submit = styled.button`
@@ -45,7 +50,7 @@ export const Submit = styled.button`
 export const FormSelect = styled.select`
   margin-top: 1vh;
   padding-left: 2px;
-  width: 99.8%;
+  width: 100%;
   height: 5vh;
   font-size: 1.2rem;
   background-color: #353944;
@@ -57,18 +62,26 @@ export const FormOption = styled.option``;
 
 export const Input = styled.input`
   height: 3vh;
-  width: 98.6%;
+  width: 98%;
   margin-top: 1vh;
   padding-left: 5px;
   font-size: 1rem;
   background-color: #353944;
   border: 1px solid white;
   color: white;
+
+  @media ${DeviceMin.md} {
+    width: 99%;
+  }
+
+  @media ${DeviceMin.lg} {
+    width: 98.5%;
+  }
 `;
 
 export const TextArea = styled.textarea`
   height: 7vh;
-  width: 99.5%;
+  width: 99%;
   margin-top: 1vh;
   font-size: 1rem;
   background-color: #353944;

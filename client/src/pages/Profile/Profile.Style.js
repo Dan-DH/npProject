@@ -1,5 +1,6 @@
 import { NavLink as Link } from "react-router-dom";
 import styled from "styled-components";
+import { DeviceMin } from "../../components/Breakpoints";
 
 export const HeaderContainer = styled.div`
   background-color: #032b43;
@@ -7,15 +8,23 @@ export const HeaderContainer = styled.div`
 
 export const Row = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
+
+  @media ${DeviceMin.lg} {
+    flex-direction: row;
+  }
 `;
 
 export const UserBioColumn = styled.div`
-  width: 50%;
+  width: 100%;
   text-align: center;
   display: flex;
   flex-direction: column;
+
+  @media ${DeviceMin.lg} {
+    width: 50%;
+  }
 `;
 
 export const UserImageContainer = styled.div`
@@ -33,8 +42,15 @@ export const UserImage = styled.img`
 export const UserBioContainer = styled.div`
   // background-color: green;
   text-align: center;
-  padding: 1rem;
+  // padding: 1rem;
   margin-bottom: 5vh;
+  width: 100%;
+`;
+
+export const Form = styled.form`
+  margin: 0;
+  padding: 0;
+  // background-color: pink;
 `;
 
 export const UserBio = styled.p`
@@ -65,16 +81,15 @@ export const Submit = styled.button`
   cursor: pointer;
 `;
 
-// export const SettingsColumn = styled.div`
-//   width: 100%;
-//   margin-top: 5vh;
-// `;
-
 export const SettingsContainer = styled.div`
   width: 100%;
 `;
 
 export const OrgEventsContainer = styled.div`
-  width: 50%;
+  width: 100%;
   // background-color: green;
+
+  @media ${DeviceMin.lg} {
+    width: 50%;
+  }
 `;

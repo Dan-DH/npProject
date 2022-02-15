@@ -9,9 +9,12 @@ import {
   Input,
   Submit,
   TextArea,
+  Paragraph,
 } from "./CreateEvent.Style";
 
 import { gql, useMutation } from "@apollo/client";
+
+const mobile = require("is-mobile");
 
 const CreateEvent = ({ user, lazyEvents }) => {
   const [errorMessage, setErrorMessage] = useState("");
@@ -61,138 +64,148 @@ const CreateEvent = ({ user, lazyEvents }) => {
     setEventLog({ ...eventLog, [e.target.name]: e.target.value });
   };
 
+  //accordion state and function
+  const [show, setShow] = useState(mobile() ? false : true);
+  const handleOpen = () => {
+    setShow(!show); // Toggle accordion
+  };
+
   return (
     <FormContainer>
-      <FormTitle>CREATE AN EVENT</FormTitle>
+      <FormTitle onClick={handleOpen}>CREATE AN EVENT</FormTitle>
       <br />
-      <FormForm
-        onSubmit={async (e) => {
-          try {
-            e.preventDefault();
-            const timeNow = new Date();
+      {show ? (
+        <FormForm
+          onSubmit={async (e) => {
+            try {
+              e.preventDefault();
+              const timeNow = new Date();
 
-            if (timeNow.getTime() > new Date(eventLog.evStart).getTime()) {
-              return setErrorMessage("Start date can't be in the past");
+              if (timeNow.getTime() > new Date(eventLog.evStart).getTime()) {
+                return setErrorMessage("Start date can't be in the past");
+              }
+
+              if (
+                new Date(eventLog.evStart).getTime() >
+                new Date(eventLog.evEnd).getTime()
+              ) {
+                return setErrorMessage("Start date must occur before end date");
+              }
+
+              await logEvent({
+                variables: {
+                  evOrganizer: eventLog.evOrganizer,
+                  evName: eventLog.evName,
+                  evType: eventLog.evType,
+                  evOnline: eventLog.evOnline,
+                  evLocation: eventLog.evLocation,
+                  evMaxParticipants: parseInt(eventLog.evMaxParticipants),
+                  evDescription: eventLog.evDescription,
+                  evStartDate: eventLog.evStart,
+                  evEndDate: eventLog.evEnd,
+                },
+              });
+              e.target.reset();
+              lazyEvents();
+              setErrorMessage("");
+            } catch (err) {
+              console.log(err);
             }
-
-            if (
-              new Date(eventLog.evStart).getTime() >
-              new Date(eventLog.evEnd).getTime()
-            ) {
-              return setErrorMessage("Start date must occur before end date");
-            }
-
-            await logEvent({
-              variables: {
-                evOrganizer: eventLog.evOrganizer,
-                evName: eventLog.evName,
-                evType: eventLog.evType,
-                evOnline: eventLog.evOnline,
-                evLocation: eventLog.evLocation,
-                evMaxParticipants: parseInt(eventLog.evMaxParticipants),
-                evDescription: eventLog.evDescription,
-                evStartDate: eventLog.evStart,
-                evEndDate: eventLog.evEnd,
-              },
-            });
-            e.target.reset();
-            lazyEvents();
-            setErrorMessage("");
-          } catch (err) {
-            console.log(err);
-          }
-        }}
-      >
-        <Label>
-          <p>Event name</p>
-          <Input
-            type="text"
-            name="evName"
-            onChange={handleInputs}
-            placeholder="..."
-            required
-          />
-        </Label>
-        <Label>
-          <p>Event type</p>
-          <FormSelect name="evType" onChange={handleInputs}>
-            <FormOption value="Boardgames" name="evType">
-              Board games
-            </FormOption>
-            <FormOption value="Hangout" name="evType">
-              Hangout
-            </FormOption>
-            <FormOption value="Roleplaying" name="evType">
-              Role games
-            </FormOption>
-            <FormOption value="Videogames" name="evType">
-              Videogames
-            </FormOption>
-          </FormSelect>
-        </Label>
-        <Label>
-          <p>Online?</p>
-          <FormSelect name="evOnline" onChange={handleInputs}>
-            <FormOption value={false} name="evOnLine">
-              In person
-            </FormOption>
-            <FormOption value={true} name="evOnLine">
-              Online
-            </FormOption>
-          </FormSelect>
-        </Label>
-        <Label>
-          <p>Location</p>
-          <Input
-            type="text"
-            name="evLocation"
-            onChange={handleInputs}
-            placeholder="..."
-            required
-          />
-        </Label>
-        <Label>
-          <p>Start date</p>
-          <Input
-            type="datetime-local"
-            name="evStart"
-            onChange={handleInputs}
-            placeholder="..."
-            required
-          />
-        </Label>
-        <Label>
-          <p>End date</p>
-          <Input
-            type="datetime-local"
-            name="evEnd"
-            onChange={handleInputs}
-            placeholder="..."
-            required
-          />
-        </Label>
-        <Label>
-          <p>Max participants</p>
-          <Input
-            type="number"
-            name="evMaxParticipants"
-            onChange={handleInputs}
-            required
-          />
-        </Label>
-        <Label>
-          <p>Event description</p>
-          <TextArea
-            name="evDescription"
-            onChange={handleInputs}
-            placeholder="..."
-          />
-        </Label>
-        <br />
-        <p style={{ color: "white", textAlign: "center" }}> {errorMessage}</p>
-        <br />
-        <Submit>Create</Submit>
-      </FormForm>
+          }}
+        >
+          <Label>
+            <Paragraph>Event name</Paragraph>
+            <Input
+              type="text"
+              name="evName"
+              onChange={handleInputs}
+              placeholder="..."
+              required
+            />
+          </Label>
+          <Label>
+            <Paragraph>Event type</Paragraph>
+            <FormSelect name="evType" onChange={handleInputs}>
+              <FormOption value="Boardgames" name="evType">
+                Board games
+              </FormOption>
+              <FormOption value="Hangout" name="evType">
+                Hangout
+              </FormOption>
+              <FormOption value="Roleplaying" name="evType">
+                Role games
+              </FormOption>
+              <FormOption value="Videogames" name="evType">
+                Videogames
+              </FormOption>
+            </FormSelect>
+          </Label>
+          <Label>
+            <Paragraph>Online?</Paragraph>
+            <FormSelect name="evOnline" onChange={handleInputs}>
+              <FormOption value={false} name="evOnLine">
+                In person
+              </FormOption>
+              <FormOption value={true} name="evOnLine">
+                Online
+              </FormOption>
+            </FormSelect>
+          </Label>
+          <Label>
+            <Paragraph>Location</Paragraph>
+            <Input
+              type="text"
+              name="evLocation"
+              onChange={handleInputs}
+              placeholder="..."
+              required
+            />
+          </Label>
+          <Label>
+            <Paragraph>Start date</Paragraph>
+            <Input
+              type="datetime-local"
+              name="evStart"
+              onChange={handleInputs}
+              placeholder="..."
+              required
+            />
+          </Label>
+          <Label>
+            <Paragraph>End date</Paragraph>
+            <Input
+              type="datetime-local"
+              name="evEnd"
+              onChange={handleInputs}
+              placeholder="..."
+              required
+            />
+          </Label>
+          <Label>
+            <Paragraph>Max participants</Paragraph>
+            <Input
+              type="number"
+              name="evMaxParticipants"
+              onChange={handleInputs}
+              required
+            />
+          </Label>
+          <Label>
+            <Paragraph>Event description</Paragraph>
+            <TextArea
+              name="evDescription"
+              onChange={handleInputs}
+              placeholder="..."
+            />
+          </Label>
+          <br />
+          <p style={{ color: "white", textAlign: "center" }}> {errorMessage}</p>
+          <br />
+          <Submit>Create</Submit>
+        </FormForm>
+      ) : (
+        true
+      )}
     </FormContainer>
   );
 };

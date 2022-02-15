@@ -61,13 +61,21 @@ export const FormOption = styled.option``;
 
 export const Input = styled.input`
   height: 3vh;
-  width: 98.5%;
+  width: 97%;
   margin-top: 1vh;
   font-size: 1rem;
   background-color: #353944;
   border: 1px solid white;
   color: white;
   padding-left: 5px;
+
+  @media ${DeviceMin.md} {
+    width: 99%;
+  }
+
+  @media ${DeviceMin.lg} {
+    width: 98.5%;
+  }
 `;
 
 export const TextArea = styled.textarea`

@@ -15,8 +15,12 @@ export const Nav = styled.nav`
 export const NavLogo = styled.img`
   max-width: 90%;
 
+  @media ${DeviceMin.sm} {
+    max-width: 30%;
+  }
+
   @media ${DeviceMin.md} {
-    max-width: 40%;
+    max-width: 35%;
   }
 `;
 

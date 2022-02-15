@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   faDiceD20,
@@ -36,7 +36,7 @@ import {
 } from "./DashboardCard.style";
 import { gql, useMutation } from "@apollo/client";
 
-function Card({ event, user, trigger, setTrigger, pathCheck }) {
+function Card({ event, user, trigger, setTrigger }) {
   const iconObject = {
     Boardgames: faDice,
     Hangout: faBeer,
@@ -57,13 +57,19 @@ function Card({ event, user, trigger, setTrigger, pathCheck }) {
     event.ev_participants.includes(user)
   );
 
-  const attending = isAttending ? "green" : "grey";
-
   const [isWaiting, setIsWaiting] = useState(
     event.ev_waiting_list.includes(user)
   );
 
-  const waiting = isWaiting ? "#e9892e" : attending;
+  const waiting = () => {
+    if (event.ev_waiting_list.includes(user)) {
+      return "#e9892e";
+    } else if (event.ev_participants.includes(user)) {
+      return "green";
+    } else {
+      return "grey";
+    }
+  };
 
   const ATTEND = gql`
     mutation Attend($userId: ID!, $eventId: ID!) {
@@ -94,10 +100,6 @@ function Card({ event, user, trigger, setTrigger, pathCheck }) {
         </CardImage>
         <InfoBox>
           <CardTitle>{event.ev_name}</CardTitle>
-          {/* <CardDescription>
-          Low-power cube, open to beginners. Come learn to draft, stay for the
-          laughs.
-        </CardDescription> */}
           <CardLocation>
             <LocationIcon icon={onLine} />
             <LocationText>{event.ev_location}</LocationText>
@@ -117,7 +119,7 @@ function Card({ event, user, trigger, setTrigger, pathCheck }) {
         </InfoBox>
         {event.ev_organizer !== user ? (
           <UserIconContainer
-            style={{ backgroundColor: waiting }}
+            style={{ backgroundColor: waiting() }}
             onClick={async () => {
               var org_check;
               if (event.ev_organizer === user) {
@@ -141,7 +143,6 @@ function Card({ event, user, trigger, setTrigger, pathCheck }) {
                   }
                 },
               });
-              setIsWaiting(!isWaiting);
               setTrigger(!trigger);
             }}
           >
