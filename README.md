@@ -20,16 +20,17 @@
 Pages/components:
 
 - Navbar menu with site logo and links to the signup and login pages (if the user is not authenticated) or to the profile page and logout (if authenticated).
-- Login / Sign up. Includes a link to the password recovery page
-- Main
+- Login page. Includes links to the sign up and password recovery pages.
+- Sign up page. Includes a link to the login page.
+- Main page. Includes:
   - List of events the user has signed for
   - List of events where the user is in the waitlist list (only renders if the user is in the waiting list for an event)
   - List of upcoming events
   - Option to create new events
   - Users can change their account information (username, email, password).
   - Users can set their profile information (profile picture and bio. Optional).
-- Password recovery. Allows the user to input their email to receive a password recovery link valid for 15 minutes.
-- Password reset. When a user clicks on the password recovery email link, they are redirected to this page to reset their password.
+- Password recovery page. Allows the user to input their email to receive a password recovery link valid for 15 minutes.
+- Password reset page. When a user clicks on the password recovery email link, they are redirected to this page to reset their password.
 - Footer with contact email and github profile links.
 
 Event related emails:
