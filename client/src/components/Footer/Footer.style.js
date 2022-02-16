@@ -3,11 +3,12 @@ import styled from "styled-components";
 export const FooterContainer = styled.div`
   background: black;
   height: 8vh;
-  // margin-top: auto;
+  margin-top: auto;
   align-items: center;
   display: flex;
   flex-direction: row;
   -webkit-justify-content: space-evenly;
+  width: 100%;
 `;
 
 export const FooterLink = styled.a`

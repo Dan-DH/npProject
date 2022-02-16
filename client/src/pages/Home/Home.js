@@ -7,6 +7,7 @@ import { Filters } from "../../components/Home/Filters/Filters";
 import Dashboard from "../../components/Home/Dashboard/Dashboard";
 import { HomeContainer, LeftCol, RightCol } from "./Home.style";
 import { gql, useLazyQuery } from "@apollo/client";
+import Footer from "../../components/Footer/Footer";
 
 function Home({ geek, setGeek, eventCards, setEventCards }) {
   const GET_EVENTS = gql`

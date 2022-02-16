@@ -4,6 +4,7 @@ import { DeviceMin } from "../../components/Breakpoints";
 
 export const HeaderContainer = styled.div`
   background-color: #032b43;
+  min-height: 80vh;
 `;
 
 export const Row = styled.div`

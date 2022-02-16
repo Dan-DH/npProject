@@ -5,7 +5,7 @@ import { DeviceMin } from "../../components/Breakpoints";
 export const HomeContainer = styled.div`
   background-color: #032b43;
   width: 100%;
-  height: 80vh;
+  min-height: 80vh;
   display: flex;
   flex-direction: column;
   align-items: center;

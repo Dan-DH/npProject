@@ -18,7 +18,7 @@ const resolvers = {
     //RETURNS ALL EVENTS -where endDate > currentDate!
     async getEvents(_, args, context) {
       try {
-        //checkAuth(context);
+        checkAuth(context);
         const timeNow = new Date();
         const events = await Event.find({
           ev_end_date: { $gt: timeNow.getTime() },
@@ -42,7 +42,7 @@ const resolvers = {
     //GET ALL USERS
     async getUsers(_, args, context) {
       try {
-        //checkAuth(context);
+        checkAuth(context);
         const users = await User.find({}, { password: 0 });
         return users;
       } catch (err) {

@@ -71,7 +71,7 @@ const SignUp = () => {
 
   //return form
   return (
-    <div>
+    <div style={{ minHeight: "80vh" }}>
       <GridSignup>
         <RowSignup>
           <Col1Signup />

@@ -5,6 +5,7 @@ export const MainContainer = styled.div`
   color: white;
   display: flex;
   flex-direction: column;
+  min-height: 80vh;
 `;
 
 export const MainSynopsis = styled.div`

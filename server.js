@@ -10,7 +10,6 @@ const { resolvers } = require("./backend/API/resolvers");
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  // accés req body(post) dans notre context
   context: ({ req }) => ({ req }),
 });
 

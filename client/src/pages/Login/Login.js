@@ -43,7 +43,7 @@ const LogIn = ({ geek, setGeek }) => {
   };
 
   return (
-    <div>
+    <div style={{ minHeight: "80vh" }}>
       <GridLogin>
         <RowLogin>
           <Col1Login />
